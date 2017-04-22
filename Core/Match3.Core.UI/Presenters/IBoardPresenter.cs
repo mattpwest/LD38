@@ -6,8 +6,8 @@ namespace Match3.Core.UI.Presenters
     {
         void Grabbed(ITileView tileView);
 
-        void Moved(int x, int y);
+        void Moved(ITileView callingTileView, int x, int y);
 
-        void Released();
+        void Released(ITileView callingTileView);
     }
 }

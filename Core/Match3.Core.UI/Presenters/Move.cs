@@ -2,13 +2,17 @@
 {
     internal class Move
     {
-        public int X { get; }
-        public int Y { get; }
+        public int ToX { get; }
+        public int ToY { get; }
+        public int FromX { get; }
+        public int FromY { get; }
 
-        public Move(int x, int y)
+        public Move(int toX, int toY, int fromX, int fromY)
         {
-            this.X = x;
-            this.Y = y;
+            this.ToX = toX;
+            this.ToY = toY;
+            this.FromX = fromX;
+            this.FromY = fromY;
         }
     }
 }

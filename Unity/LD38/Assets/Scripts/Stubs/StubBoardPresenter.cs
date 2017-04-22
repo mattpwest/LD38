@@ -19,12 +19,12 @@ public class StubBoardPresenter : MonoBehaviour, IBoardPresenter {
         throw new System.NotImplementedException();
     }
 
-    public void Moved(int x, int y)
+    public void Moved(ITileView callingTileView, int x, int y)
     {
         throw new System.NotImplementedException();
     }
 
-    public void Released()
+    public void Released(ITileView callingTileView)
     {
         throw new System.NotImplementedException();
     }

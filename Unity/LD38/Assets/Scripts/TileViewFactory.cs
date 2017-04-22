@@ -62,6 +62,7 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 
         var viewTransform = Instantiate(this.TileViews[index], new Vector3(startX, startY, 0.0f), Quaternion.identity);
         var tileView = viewTransform.GetComponent<TileView>();
+        tileView.Presenter = presenter;
 
         return tileView;
     }

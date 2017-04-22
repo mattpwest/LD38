@@ -1,8 +1,17 @@
-﻿using Match3.Core.UI.Views;
+﻿using Match3.Core.UI.Presenters;
+using Match3.Core.UI.Views;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class TileView : MonoBehaviour, ITileView
+public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    const int TILE_SIZE = 32;
+
+    public int X { get; set; }
+    public int Y { get; set; }
+    public int OriginalY { get; private set; }
+    public int OriginalX { get; private set; }
+    public IBoardPresenter Presenter { get; set; }
 
     private Vector2 targetPosition;
     private float minX;
@@ -10,7 +19,10 @@ public class TileView : MonoBehaviour, ITileView
     private float minY;
     private float maxY;
 
-    void Start() {
+    private Vector2 dragStart;
+
+    void Start()
+    {
         var bounds = Camera.main.OrthographicBounds();
         this.minX = -bounds.max.x;
         this.minY = -bounds.max.y;
@@ -18,15 +30,16 @@ public class TileView : MonoBehaviour, ITileView
         this.maxY = bounds.max.y;
     }
 
-    void Update () {
+    void Update()
+    {
         this.targetPosition = new Vector2(this.minX + 0.5f + X * 1.0f, this.minY + 0.5f + Y * 1.0f);
 
         Vector2 currentPosition = (Vector2)this.transform.position;
-        if (!currentPosition.Equals(this.targetPosition))
-	    {
-	        this.transform.position = currentPosition + (this.targetPosition - currentPosition) * 0.1f;
-	    }
-	}
+        if(!currentPosition.Equals(this.targetPosition))
+        {
+            this.transform.position = currentPosition + (this.targetPosition - currentPosition) * 0.1f;
+        }
+    }
 
     public void Fall(int x, int y)
     {
@@ -36,24 +49,65 @@ public class TileView : MonoBehaviour, ITileView
 
     public void Move(int x, int y)
     {
-        throw new System.NotImplementedException();
+        this.X = x;
+        this.Y = y;
     }
 
     public void Destroy()
     {
-        throw new System.NotImplementedException();
+        Destroy(gameObject);
+        // TODO: Add destroy FX
     }
 
-    public int X { get; set; }
-    public int Y { get; set; }
+    public void OnDrag(PointerEventData eventData)
+    {
+        const float moveThreshold = 0.25f * TILE_SIZE;
 
-    void OnMouseDown()
-    {
-        Debug.Log("mouse went down on a tile: " + X + ", " + Y);
+        var deltaX = eventData.position.x - this.dragStart.x;
+        var deltaY = eventData.position.y - this.dragStart.y;
+        var xOverThreshold = Mathf.Abs(deltaX) > moveThreshold;
+        var yOverThreshold = Mathf.Abs(deltaY) > moveThreshold;
+
+        if(xOverThreshold && Mathf.Abs(deltaX) > Mathf.Abs(deltaY))
+        {
+            if (deltaX < 0) {
+                this.Presenter.Moved(this, this.OriginalX - 1, this.OriginalY);
+                //Debug.Log("Moved left");
+            } else if (deltaX > 0) {
+                this.Presenter.Moved(this, this.OriginalX + 1, this.OriginalY);
+                //Debug.Log("Moved right");
+            }
+        }
+        else if(yOverThreshold && Mathf.Abs(deltaY) > Mathf.Abs(deltaX))
+        {
+            if (deltaY < 0) {
+                this.Presenter.Moved(this, this.OriginalX, this.OriginalY - 1);
+                //Debug.Log("Moved down");
+            } else if (deltaY > 0) {
+                this.Presenter.Moved(this, this.OriginalX, this.OriginalY + 1);
+                //Debug.Log("Moved up");
+            }
+        }
+        else
+        {
+            //Debug.Log("Moved center");
+            this.Presenter.Moved(this, this.OriginalX, this.OriginalY);
+        }
     }
-    /*
-    public void OnPointerDown(PointerEventData eventData)
+
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("mouse went down on a tile");
-    }*/
+        this.OriginalX = X;
+        this.OriginalY = Y;
+
+        this.dragStart = eventData.position;
+        this.Presenter.Grabbed(this);
+        //Debug.Log("Grabbed");
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        this.Presenter.Released(this);
+        //Debug.Log("Released");
+    }
 }
