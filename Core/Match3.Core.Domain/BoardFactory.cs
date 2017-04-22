@@ -6,24 +6,15 @@ namespace Match3.Core.Domain
     {
         public Board Board { get; private set; }
 
-        public Board Generate(int width, int height) {
+        public Board Generate(int width, int height)
+        {
             this.Board = new Board(width, height);
 
-            this.GenerateTiles();
+            this.GenerateTiles(width, height, this.Board.SetTile);
 
             return this.Board;
         }
 
-        protected abstract void GenerateTiles(); // Generate tiles using 
-
-        protected void SetTile(int x, int y, Tile tile) {
-            this.Board.SetTile(x, y, tile);
-        }
-    }
-
-    public interface IRandom
-    {
-        int GetRandomNumber(int inclusiveFrom, int exclusiveTo);
-        int GetRandomNumber(int exclusiveTo);
+        protected abstract void GenerateTiles(int width, int height, Action<int, int, Tile> setTile); // Generate tiles using 
     }
 }

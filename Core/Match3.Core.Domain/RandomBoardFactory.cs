@@ -1,3 +1,5 @@
+using System;
+
 namespace Match3.Core.Domain
 {
     public class RandomBoardFactory : BoardFactory
@@ -17,15 +19,15 @@ namespace Match3.Core.Domain
             }
         }
 
-        protected override void GenerateTiles()
+        protected override void GenerateTiles(int width, int height, Action<int, int, Tile> setTile)
         {
-            for(int x = 0; x < this.Board.Width; x++)
+            for(int x = 0; x < width; x++)
             {
-                for(int y = 0; y < this.Board.Height; y++)
+                for(int y = 0; y < height; y++)
                 {
                     var tileIndex = this.random.GetRandomNumber(this.tiles.Length);
                     var tileToPlace = this.tiles[tileIndex];
-                    this.SetTile(x, y, tileToPlace);
+                    setTile(x, y, tileToPlace);
                 }
             }
         }

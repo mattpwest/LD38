@@ -12,18 +12,18 @@ namespace Match3.Core.Tests.Domain.Stubs
             this.tile = new Tile(Guid.Empty.ToString());
         }
 
-        protected override void GenerateTiles()
+        protected override void GenerateTiles(int width, int height, Action<int, int, Tile> setTile)
         {
-            if(this.Board.Width > 2 || this.Board.Height > 2)
+            if(width > 2 || height > 2)
             {
                 throw new InvalidOperationException("This test factory is only for boards with a width and height of 2 or less");
             }
 
-            for(int x = 0; x < this.Board.Width; x++)
+            for(int x = 0; x < width; x++)
             {
-                for(int y = 0; y < this.Board.Height; y++)
+                for(int y = 0; y < height; y++)
                 {
-                    this.SetTile(x, y, this.tile);
+                    setTile(x, y, this.tile);
                 }
             }
         }
