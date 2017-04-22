@@ -27,8 +27,8 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-Match3.Core.Domain/packages/*
-Match3.Core.Domain/*.vs
+packages
+.vs
 
 *.js.map
 
