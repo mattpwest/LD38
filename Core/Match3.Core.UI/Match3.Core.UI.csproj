@@ -38,10 +38,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Presenters\BoardPresenter.cs" />
     <Compile Include="Presenters\IBoardPresenter.cs" />
+    <Compile Include="Presenters\Move.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\ITileView.cs" />
+    <Compile Include="Views\ITileViewFactory.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Match3.Core.Domain\Match3.Core.Domain.csproj">
+      <Project>{D1091A29-A165-4F76-AFDF-18CBC5EF3999}</Project>
+      <Name>Match3.Core.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

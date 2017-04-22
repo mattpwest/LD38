@@ -1,3 +1,5 @@
+using System;
+
 namespace Match3.Core.Domain
 {
     public abstract class BoardFactory
@@ -17,5 +19,11 @@ namespace Match3.Core.Domain
         protected void SetTile(int x, int y, Tile tile) {
             this.Board.SetTile(x, y, tile);
         }
+    }
+
+    public interface IRandom
+    {
+        int GetRandomNumber(int inclusiveFrom, int exclusiveTo);
+        int GetRandomNumber(int exclusiveTo);
     }
 }
