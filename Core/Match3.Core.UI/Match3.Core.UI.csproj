@@ -45,6 +45,11 @@
     <Compile Include="Views\ITileView.cs" />
     <Compile Include="Views\ITileViewFactory.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Match3.Core.Domain\Match3.Core.Domain.csproj">
+      <Project>{d1091a29-a165-4f76-afdf-18cbc5ef3999}</Project>
+      <Name>Match3.Core.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

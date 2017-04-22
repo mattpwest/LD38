@@ -1,6 +1,7 @@
 ﻿using Match3.Core.UI.Presenters;
 using Match3.Core.UI.Views;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TileViewFactory : MonoBehaviour, ITileViewFactory
 {
@@ -28,14 +29,7 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 	    Debug.Log("MaxY: " + maxY);
 
         // Test: for now
-	    StubBoardPresenter boardPresenter = GetComponent<StubBoardPresenter>();
-	    CreateInitial(boardPresenter, "Test", 0, 0);
-	    CreateInitial(boardPresenter, "Test", 0, 1);
-	    CreateInitial(boardPresenter, "Test", 0, 2);
-
-	    Create(boardPresenter, "Test", 1, 0);
-	    Create(boardPresenter, "Test", 1, 1);
-	    Create(boardPresenter, "Test", 1, 2);
+        BoardPresenter boardPresenter = new BoardPresenter(this, RNG.Instance, 5, 5, "Test", "Test2", "Test3");
     }
 	
 	void Update ()
