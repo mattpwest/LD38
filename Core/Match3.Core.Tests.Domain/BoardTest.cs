@@ -43,11 +43,14 @@ namespace Match3.Core.Tests.Domain {
         [Test]
         public void TestBoardCanDetectHorizontalMatches()
         {
-            // Given when
+            // Given
             const int width = 3;
             const int height = 3;
             BoardFactory boardFactory = new StubHorizontalMatchBoardFactory();
             var board = boardFactory.Generate(width, height);
+            
+            // When
+            board.CheckMatches();
 
             // Then
             Assert.AreEqual(1, board.Matches.Count());
@@ -62,11 +65,14 @@ namespace Match3.Core.Tests.Domain {
         [Test]
         public void TestBoardCanDetectVerticalMatches()
         {
-            // Given when
+            // Given
             const int width = 3;
             const int height = 3;
             BoardFactory boardFactory = new StubVerticalMatchBoardFactory();
             var board = boardFactory.Generate(width, height);
+
+            // When
+            board.CheckMatches();
 
             // Then
             Assert.AreEqual(1, board.Matches.Count());
@@ -86,6 +92,7 @@ namespace Match3.Core.Tests.Domain {
             const int height = 3;
             BoardFactory boardFactory = new StubVerticalMatchBoardFactory();
             var board = boardFactory.Generate(width, height);
+            board.CheckMatches();
 
             // When
             board.ClearMatches();
@@ -101,6 +108,7 @@ namespace Match3.Core.Tests.Domain {
             const int height = 3;
             BoardFactory boardFactory = new StubVerticalMatchBoardFactory();
             var board = boardFactory.Generate(width, height);
+            board.CheckMatches();
             var match = board.Matches.First();
 
             // When
@@ -147,6 +155,45 @@ namespace Match3.Core.Tests.Domain {
             var board = factory.Generate(width, height);
 
             Assert.Throws<InvalidOperationException>(() => board.Move(xStart, yStart, xEnd, yEnd), message);
+        }
+
+        [Test]
+        public void TestFallTiles()
+        {
+            BoardFactory factory = new StubFallBoardFactory();
+            var board = factory.Generate(2, 4);
+            var previouslyFilledTile1 = board.GetTile(0, 2);
+            var previouslyFilledTile2 = board.GetTile(0, 3);
+            var previouslyFilledTile3 = board.GetTile(1, 3);
+
+            board.FallTiles();
+
+            var emptyTile1 = board.GetTile(0, 3);
+            var emptyTile2 = board.GetTile(1, 2);
+            var emptyTile3 = board.GetTile(1, 3);
+            var filledTile1 = board.GetTile(0, 1);
+            var filledTile2 = board.GetTile(0, 2);
+            var filledTile3 = board.GetTile(1, 1);
+
+            Assert.IsNull(emptyTile1);
+            Assert.IsNull(emptyTile2);
+            Assert.IsNull(emptyTile3);
+            Assert.AreEqual(previouslyFilledTile1, filledTile1);
+            Assert.AreEqual(previouslyFilledTile2, filledTile2);
+            Assert.AreEqual(previouslyFilledTile3, filledTile3);
+        }
+
+        [Test]
+        public void TestFillBoard()
+        {
+            BoardFactory factory = new StubFillBoardFactory();
+            var board = factory.Generate(3, 4);
+
+            board.FillTiles(new RandomTileGenerator());
+
+            Assert.IsNotNull(board.GetTile(0, 2));
+            Assert.IsNotNull(board.GetTile(0, 3));
+            Assert.IsNotNull(board.GetTile(1, 3));
         }
     }
 }

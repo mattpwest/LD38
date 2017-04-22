@@ -41,13 +41,15 @@
     <Compile Include="Presenters\BoardPresenter.cs" />
     <Compile Include="Presenters\IBoardPresenter.cs" />
     <Compile Include="Presenters\Move.cs" />
+    <Compile Include="Presenters\RandomBoardFactory.cs" />
+    <Compile Include="Presenters\RandomTileGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\ITileView.cs" />
     <Compile Include="Views\ITileViewFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Match3.Core.Domain\Match3.Core.Domain.csproj">
-      <Project>{D1091A29-A165-4F76-AFDF-18CBC5EF3999}</Project>
+      <Project>{d1091a29-a165-4f76-afdf-18cbc5ef3999}</Project>
       <Name>Match3.Core.Domain</Name>
     </ProjectReference>
   </ItemGroup>

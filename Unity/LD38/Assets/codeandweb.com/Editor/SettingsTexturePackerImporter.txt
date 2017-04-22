@@ -1,0 +1,9 @@
+version: 2
+importPivots: 1
+tpsheetFileNames:
+- Assets/Art/Art.tpsheet
+textureFileNames:
+- Assets/Art/Art.png
+normalmapFileNames:
+- 
+enableDebugOutput: 0
