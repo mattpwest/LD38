@@ -124,5 +124,74 @@ namespace Match3.Core.Domain
             SetTile(xStart, yStart, GetTile(xEnd, yEnd));
             SetTile(xEnd, yEnd, temp);
         }
+
+        public void FallTiles()
+        {
+            for(var x = 0; x < this.Width; x++)
+            {
+                var emptyY = -1;
+                for(var y = 0; y < this.Height; y++)
+                {
+                    if(emptyY < 0 && this.tiles[x, y] != null)
+                    {
+                        continue;
+                    }
+
+                    if(emptyY < 0 && this.tiles[x, y] == null)
+                    {
+                        emptyY = y;
+                        continue;
+                    }
+
+                    if(this.tiles[x, y] == null)
+                    {
+                        continue;
+                    }
+
+                    this.tiles[x, emptyY] = this.tiles[x, y];
+                    this.tiles[x, y] = null;
+                    emptyY++;
+                }
+            }
+        }
+
+        public void FillTiles(ITileGenerator tileGenerator)
+        {
+            this.FillTiles(tileGenerator, 0);
+        }
+
+        private void FillTiles(ITileGenerator tileGenerator, int x)
+        {
+            if(x >= this.Width)
+            {
+                return;
+            }
+
+            this.FillTiles(tileGenerator, x, this.Height - 1);
+
+            this.FillTiles(tileGenerator, x + 1);
+        }
+
+        private void FillTiles(ITileGenerator tileGenerator, int x, int y)
+        {
+            if(y < 0)
+            {
+                return;
+            }
+
+            if(this.tiles[x, y] != null)
+            {
+                return;
+            }
+
+            this.FillTiles(tileGenerator, x, y - 1);
+
+            this.tiles[x, y] = tileGenerator.GenerateTile();
+        }
+    }
+
+    public interface ITileGenerator
+    {
+        Tile GenerateTile();
     }
 }

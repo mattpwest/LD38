@@ -20,9 +20,17 @@ namespace Match3.Core.UI.Presenters
         public BoardPresenter(ITileViewFactory tileViewFactory, IRandom random, int boardWidth, int boardHeight, params string[] tileTypes)
             : this()
         {
-            var boardFactory = new RandomBoardFactory(random, tileTypes);
+            var tileGenerator = new RandomTileGenerator(random, tileTypes);
+            var boardFactory = new RandomBoardFactory(tileGenerator);
 
             this.board = boardFactory.Generate(boardWidth, boardHeight);
+
+            while(this.board.Matches.Any())
+            {
+                this.board.ClearMatches();
+
+                this.board.FillTiles(tileGenerator);
+            }
 
             this.tiles = new ITileView[boardWidth, boardHeight];
 
