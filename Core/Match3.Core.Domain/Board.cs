@@ -53,7 +53,7 @@ namespace Match3.Core.Domain
 
                     if (!cellToCheck.IsDirty || cellToCheck.IsEmpty)
                     {
-                        return;
+                        continue;
                     }
 
                     var tileToMatch = cellToCheck.Tile;

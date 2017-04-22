@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Match3.Core.Domain;
 using Match3.Core.UI.Views;
 
@@ -113,6 +114,8 @@ namespace Match3.Core.UI.Presenters
 
             this.board.Move(this.pendingMove.FromX, this.pendingMove.FromY, this.pendingMove.ToX, this.pendingMove.ToY);
 
+            this.board.CheckMatches();
+
             if (!this.board.Matches.Any()) {
                 var tileToUndo = this.tiles[this.pendingMove.FromX, this.pendingMove.FromY];
                 tileToUndo.Move(this.pendingMove.ToX, this.pendingMove.ToY);
@@ -121,7 +124,20 @@ namespace Match3.Core.UI.Presenters
                 this.tiles[this.pendingMove.FromX, this.pendingMove.FromY] = this.grabbedTile;
             }
 
-            //this.board.ClearMatches();
+            foreach(var match in this.board.Matches)
+            {
+                for(var i = 0; i < match.Length; i++)
+                {
+                    var xModifier = match.StartX == match.EndX ? 0 : i;
+                    var yModifier = match.StartY == match.EndY ? 0 : i;
+                    var x = Math.Min(match.StartX, match.EndX) + xModifier;
+                    var y = Math.Min(match.StartY, match.EndY) + yModifier;
+
+                    this.tiles[x, y].Destroy();
+                }
+            }
+
+            this.board.ClearMatches();
 
             //this.tiles[this.grabbedTile.X, this.grabbedTile.Y] = this.tiles[this.pendingMove.ToX, this.pendingMove.ToY];
             //this.tiles[this.pendingMove.ToX, this.pendingMove.ToY] = this.grabbedTile;
