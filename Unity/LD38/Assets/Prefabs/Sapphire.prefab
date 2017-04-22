@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114583788748343848}
   - component: {fileID: 212706574691023730}
   - component: {fileID: 50254650380056524}
-  - component: {fileID: 61391068300784626}
+  - component: {fileID: 61989810505368030}
   m_Layer: 0
   m_Name: Sapphire
   m_TagString: Untagged
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1369599367110238}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.488604, y: -4.2248588, z: 0}
+  m_LocalPosition: {x: 5.000063, y: 0.46512264, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,7 +63,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61391068300784626
+--- !u!61 &61989810505368030
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

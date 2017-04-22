@@ -1,7 +1,6 @@
 ﻿using Match3.Core.UI.Views;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
 public class TileView : MonoBehaviour, ITileView
 {
 
@@ -50,7 +49,7 @@ public class TileView : MonoBehaviour, ITileView
 
     void OnMouseDown()
     {
-        Debug.Log("mouse went down on a tile");
+        Debug.Log("mouse went down on a tile: " + X + ", " + Y);
     }
     /*
     public void OnPointerDown(PointerEventData eventData)
