@@ -18,6 +18,7 @@ namespace Match3.Core.UI.Presenters
                 this.tiles[i] = new Tile(tileTypes[i]);
             }
         }
+
         public Tile GenerateTile()
         {
             var tileIndex = this.random.GetRandomNumber(this.tiles.Length);

@@ -29,6 +29,8 @@ namespace Match3.Core.UI.Presenters
             {
                 this.board.ClearMatches();
 
+                this.board.FallTiles();
+
                 this.board.FillTiles(tileGenerator);
             }
 

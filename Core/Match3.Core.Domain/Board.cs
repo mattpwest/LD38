@@ -7,6 +7,7 @@ namespace Match3.Core.Domain
     {
         private readonly int matchLength;
         private readonly Tile[,] tiles;
+        private readonly Cell[,] cells;
         private readonly List<Match> matches;
 
         public int Width => this.tiles.GetLength(0);
@@ -148,7 +149,8 @@ namespace Match3.Core.Domain
                         continue;
                     }
 
-                    this.tiles[x, emptyY] = this.tiles[x, y];
+                    var tileToFall = this.tiles[x, y];
+                    this.SetTile(x, emptyY, tileToFall);
                     this.tiles[x, y] = null;
                     emptyY++;
                 }
@@ -186,7 +188,20 @@ namespace Match3.Core.Domain
 
             this.FillTiles(tileGenerator, x, y - 1);
 
-            this.tiles[x, y] = tileGenerator.GenerateTile();
+            this.SetTile(x, y, tileGenerator.GenerateTile());
+        }
+    }
+
+    internal class Cell
+    {
+        private readonly int X;
+
+        private Tile tile;
+        private bool isDirty;
+
+        public Cell()
+        {
+            
         }
     }
 
