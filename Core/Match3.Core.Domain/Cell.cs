@@ -5,10 +5,8 @@ namespace Match3.Core.Domain
     internal class Cell
     {
         private Tile tile;
-        private bool isHorizontalDirty;
-        private bool isVerticalDirty;
 
-        public bool IsDirty => this.isHorizontalDirty || this.isVerticalDirty;
+        public bool IsDirty => this.IsHorizontalDirty || this.IsVerticalDirty;
         public int X { get; }
         public int Y { get; }
 
@@ -22,18 +20,23 @@ namespace Match3.Core.Domain
                     throw new ArgumentNullException();
                 }
 
-                this.isHorizontalDirty = true;
-                this.isVerticalDirty = true;
+                this.IsHorizontalDirty = true;
+                this.IsVerticalDirty = true;
                 this.tile = value;
             }
         }
 
         public bool IsEmpty => this.tile == null;
 
+        public bool IsHorizontalDirty { get; private set; }
+
+        public bool IsVerticalDirty { get; private set; }
+
         private Cell()
         {
-            this.isHorizontalDirty = true;
-            this.isVerticalDirty = true;
+            this.IsHorizontalDirty = true;
+            this.IsVerticalDirty = true;
+            this.tile = null;
         }
 
         public Cell(int x, int y)
@@ -46,18 +49,18 @@ namespace Match3.Core.Domain
         public void Clear()
         {
             this.tile = null;
-            this.isHorizontalDirty = true;
-            this.isVerticalDirty = true;
+            this.IsHorizontalDirty = true;
+            this.IsVerticalDirty = true;
         }
 
         public void MarkHorizontalClean()
         {
-            this.isHorizontalDirty = false;
+            this.IsHorizontalDirty = false;
         }
 
         public void MarkVerticalClean()
         {
-            this.isVerticalDirty = false;
+            this.IsVerticalDirty = false;
         }
     }
 }

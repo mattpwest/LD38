@@ -41,61 +41,107 @@ namespace Match3.Core.Domain
         internal void SetTile(int x, int y, Tile tile)
         {
             this.cells[x, y].Tile = tile;
-
-            this.CheckMatches(x, y);
         }
 
-        private void CheckMatches(int x, int y)
-        {
-            var tileToMatch = this.cells[x, y].Tile;
-            var horizontalMatchStart = x;
-            var horizontalMatchEnd = x;
-            var verticalMatchStart = y;
-            var verticalMatchEnd = y;
-
-            for(var xToFind = x - 1; xToFind >= 0; xToFind--)
+        public void CheckMatches()
+         {
+            for(int x = 0; x < this.Width; x++)
             {
-                var cell = this.cells[xToFind, y];
-                if(cell.IsEmpty || tileToMatch != cell.Tile)
+                for(int y = 0; y < this.Height; y++)
                 {
-                    break;
-                }
-                horizontalMatchStart = xToFind;
-            }
-            for(var xToFind = x + 1; xToFind < this.Width; xToFind++)
-            {
-                var cell = this.cells[xToFind, y];
-                if(cell.IsEmpty || tileToMatch != cell.Tile)
-                {
-                    break;
-                }
-                horizontalMatchEnd = xToFind;
-            }
-            for(int yToFind = y; yToFind >= 0; yToFind--) {
-                var cell = this.cells[x, yToFind];
-                if (cell.IsEmpty || tileToMatch != cell.Tile) {
-                    break;
-                }
-                verticalMatchStart = yToFind;
-            }
-            for(int yToFind = y; yToFind < this.Height; yToFind++) {
-                var cell = this.cells[x, yToFind];
-                if (cell.IsEmpty || tileToMatch != cell.Tile) {
-                    break;
-                }
-                verticalMatchEnd = yToFind;
-            }
+                    var cellToCheck = this.cells[x, y];
 
-            if(horizontalMatchEnd - horizontalMatchStart + 1 >= this.matchLength)
-            {
-                 var horizontalMatch = new Match(horizontalMatchStart, y, horizontalMatchEnd, y);
-                this.matches.Add(horizontalMatch);
-            }
+                    if (!cellToCheck.IsDirty || cellToCheck.IsEmpty)
+                    {
+                        return;
+                    }
 
-            if(verticalMatchEnd - verticalMatchStart + 1 >= this.matchLength)
-            {
-                var verticalMatch = new Match(x, verticalMatchStart, x, verticalMatchEnd);
-                this.matches.Add(verticalMatch);
+                    var tileToMatch = cellToCheck.Tile;
+                    var horizontalMatchStart = x;
+                    var horizontalMatchEnd = x;
+                    var verticalMatchStart = y;
+                    var verticalMatchEnd = y;
+
+                    if(cellToCheck.IsHorizontalDirty)
+                    {
+                        for (var xToFind = x - 1; xToFind >= 0; xToFind--)
+                        {
+                            var cell = this.cells[xToFind, y];
+                            if (cell.IsEmpty || tileToMatch != cell.Tile)
+                            {
+                                break;
+                            }
+
+                            if (cell.IsHorizontalDirty)
+                            {
+                                cell.MarkHorizontalClean();
+                            }
+
+                            horizontalMatchStart = xToFind;
+                        }
+                        for (var xToFind = x + 1; xToFind < this.Width; xToFind++)
+                        {
+                            var cell = this.cells[xToFind, y];
+                            if (cell.IsEmpty || tileToMatch != cell.Tile)
+                            {
+                                break;
+                            }
+
+                            if (cell.IsHorizontalDirty)
+                            {
+                                cell.MarkHorizontalClean();
+                            }
+
+                            horizontalMatchEnd = xToFind;
+                        }
+                        cellToCheck.MarkHorizontalClean();
+                    }
+                    if(cellToCheck.IsVerticalDirty)
+                    {
+                        for (int yToFind = y - 1; yToFind >= 0; yToFind--)
+                        {
+                            var cell = this.cells[x, yToFind];
+                            if (cell.IsEmpty || tileToMatch != cell.Tile)
+                            {
+                                break;
+                            }
+
+                            if (cell.IsVerticalDirty)
+                            {
+                                cell.MarkVerticalClean();
+                            }
+
+                            verticalMatchStart = yToFind;
+                        }
+                        for (int yToFind = y + 1; yToFind < this.Height; yToFind++)
+                        {
+                            var cell = this.cells[x, yToFind];
+                            if (cell.IsEmpty || tileToMatch != cell.Tile)
+                            {
+                                break;
+                            }
+
+                            if (cell.IsVerticalDirty)
+                            {
+                                cell.MarkVerticalClean();
+                            }
+                            verticalMatchEnd = yToFind;
+                        }
+                        cellToCheck.MarkVerticalClean();
+                    }
+
+                    if (horizontalMatchEnd - horizontalMatchStart + 1 >= this.matchLength)
+                    {
+                        var horizontalMatch = new Match(horizontalMatchStart, y, horizontalMatchEnd, y);
+                        this.matches.Add(horizontalMatch);
+                    }
+
+                    if (verticalMatchEnd - verticalMatchStart + 1 >= this.matchLength)
+                    {
+                        var verticalMatch = new Match(x, verticalMatchStart, x, verticalMatchEnd);
+                        this.matches.Add(verticalMatch);
+                    }
+                }
             }
         }
 

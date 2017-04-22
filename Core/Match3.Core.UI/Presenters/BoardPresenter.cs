@@ -24,6 +24,7 @@ namespace Match3.Core.UI.Presenters
             var boardFactory = new RandomBoardFactory(tileGenerator);
 
             this.board = boardFactory.Generate(boardWidth, boardHeight);
+            this.board.CheckMatches();
 
             while(this.board.Matches.Any())
             {
@@ -32,6 +33,8 @@ namespace Match3.Core.UI.Presenters
                 this.board.FallTiles();
 
                 this.board.FillTiles(tileGenerator);
+
+                this.board.CheckMatches();
             }
 
             this.tiles = new ITileView[boardWidth, boardHeight];
