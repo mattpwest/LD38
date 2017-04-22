@@ -1,6 +1,6 @@
 namespace Match3.Core.Domain
 {
-    public abstract class AbstractBoardFactory
+    public abstract class BoardFactory
     {
         public Board Board { get; private set; }
 

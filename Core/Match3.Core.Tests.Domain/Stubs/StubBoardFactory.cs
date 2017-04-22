@@ -1,18 +1,18 @@
-﻿using Match3.Core.Domain;
+﻿using System;
+using Match3.Core.Domain;
 
 namespace Match3.Core.Tests.Domain.Stubs
 {
-    public class StubBoardFactory : AbstractBoardFactory
+    public class StubBoardFactory : BoardFactory
     {
-        private readonly Tile stubTile = new Tile("test");
-
         protected override void GenerateTiles()
         {
             for(var x = 0; x < Board.Width; x++)
             {
                 for(var y = 0; y < Board.Height; y++)
                 {
-                    SetTile(x, y, this.stubTile);
+                    var tile = new Tile(Guid.NewGuid().ToString());
+                    SetTile(x, y, tile);
                 }
             }
         }

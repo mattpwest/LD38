@@ -2,7 +2,7 @@
 using Match3.Core.Domain;
 
 namespace Match3.Core.Tests.Domain.Stubs {
-    internal class StubVerticalMatchBoardFactory : AbstractBoardFactory {
+    internal class StubVerticalMatchBoardFactory : BoardFactory {
 
         protected override void GenerateTiles()
         {

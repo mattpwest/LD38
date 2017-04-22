@@ -38,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="MatchTest.cs" />
+    <Compile Include="Stubs\StubAllOneTileBoardFactory.cs" />
     <Compile Include="Stubs\StubVerticalMatchBoardFactory.cs" />
     <Compile Include="Stubs\StubHorizontalMatchBoardFactory.cs" />
     <Compile Include="Stubs\StubBoardFactory.cs" />

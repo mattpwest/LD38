@@ -1,20 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Match3.Core.Domain
 {
     public class Board
     {
         private readonly int matchLength;
-
         private readonly Tile[,] tiles;
+        private readonly List<Match> matches;
+
         public int Width => this.tiles.GetLength(0);
         public int Height => this.tiles.GetLength(1);
-        public List<Match> Matches { get; }
+        public IEnumerable<Match> Matches => this.matches;
 
         private Board()
         {
             this.matchLength = 3;
-            this.Matches = new List<Match>();
+            this.matches = new List<Match>();
         }
 
         internal Board(int width, int height)
@@ -79,14 +81,48 @@ namespace Match3.Core.Domain
             if(horizontalMatchEnd - horizontalMatchStart + 1 >= this.matchLength)
             {
                  var horizontalMatch = new Match(horizontalMatchStart, y, horizontalMatchEnd, y);
-                this.Matches.Add(horizontalMatch);
+                this.matches.Add(horizontalMatch);
             }
 
             if(verticalMatchEnd - verticalMatchStart + 1 >= this.matchLength)
             {
                 var verticalMatch = new Match(x, verticalMatchStart, x, verticalMatchEnd);
-                this.Matches.Add(verticalMatch);
+                this.matches.Add(verticalMatch);
             }
+        }
+
+        public void ClearMatches()
+        {
+            foreach(var match in this.Matches)
+            {
+                for(int x = match.StartX; x <= match.EndX; x++)
+                {
+                    for(int y = match.StartY; y <= match.EndY; y++)
+                    {
+                        this.tiles[x, y] = null;
+                    }
+                }
+            }
+
+            this.matches.Clear();
+        }
+
+        public void Move(int xStart, int yStart, int xEnd, int yEnd)
+        {
+            var xDiff = Math.Abs(xEnd - xStart);
+            var yDiff = Math.Abs(yEnd - yStart);
+            if(xDiff > 1 || yDiff > 1)
+            {
+                throw new InvalidOperationException("Tiles must be adjacent");
+            }
+            if(xDiff > 0 && yDiff > 0)
+            {
+                throw new InvalidOperationException("Tiles can not be diagonal");
+            }
+
+            var temp = GetTile(xStart, yStart);
+            SetTile(xStart, yStart, GetTile(xEnd, yEnd));
+            SetTile(xEnd, yEnd, temp);
         }
     }
 }
