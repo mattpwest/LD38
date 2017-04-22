@@ -38,7 +38,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="MatchTest.cs" />
+    <Compile Include="Stubs\RandomTileGenerator.cs" />
     <Compile Include="Stubs\StubAllOneTileBoardFactory.cs" />
+    <Compile Include="Stubs\StubFallBoardFactory.cs" />
+    <Compile Include="Stubs\StubFillBoardFactory.cs" />
     <Compile Include="Stubs\StubVerticalMatchBoardFactory.cs" />
     <Compile Include="Stubs\StubHorizontalMatchBoardFactory.cs" />
     <Compile Include="Stubs\StubBoardFactory.cs" />

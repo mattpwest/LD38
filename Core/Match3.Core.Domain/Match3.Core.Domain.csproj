@@ -39,7 +39,6 @@
     <Compile Include="IRandom.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomBoardFactory.cs" />
     <Compile Include="Tile.cs" />
   </ItemGroup>
   <ItemGroup />
