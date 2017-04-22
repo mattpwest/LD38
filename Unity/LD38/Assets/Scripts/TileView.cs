@@ -18,11 +18,11 @@ public class TileView : MonoBehaviour, ITileView
         this.maxX = bounds.max.x;
         this.maxY = bounds.max.y;
     }
-	
-	void Update () {
-	    this.targetPosition = new Vector2(this.minX + 0.5f + X * 1.0f, this.minY + 0.5f + Y * 1.0f);
 
-	    Vector2 currentPosition = (Vector2)this.transform.position;
+    void Update () {
+        this.targetPosition = new Vector2(this.minX + 0.5f + X * 1.0f, this.minY + 0.5f + Y * 1.0f);
+
+        Vector2 currentPosition = (Vector2)this.transform.position;
         if (!currentPosition.Equals(this.targetPosition))
 	    {
 	        this.transform.position = currentPosition + (this.targetPosition - currentPosition) * 0.1f;
@@ -31,7 +31,8 @@ public class TileView : MonoBehaviour, ITileView
 
     public void Fall(int x, int y)
     {
-        throw new System.NotImplementedException();
+        this.X = x;
+        this.Y = y;
     }
 
     public void Move(int x, int y)

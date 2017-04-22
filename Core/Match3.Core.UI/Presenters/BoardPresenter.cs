@@ -32,6 +32,7 @@ namespace Match3.Core.UI.Presenters
                 {
                     var tile = this.board.GetTile(x, y);
                     this.tiles[x, y] = tileViewFactory.CreateInitial(this, tile.Type, x, y);
+                    this.tiles[x, y].Fall(x, y);
                 }
             }
         }
