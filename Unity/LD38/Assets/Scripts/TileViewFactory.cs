@@ -1,14 +1,15 @@
 ﻿using Match3.Core.UI.Presenters;
 using Match3.Core.UI.Views;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using System;
 
 public class TileViewFactory : MonoBehaviour, ITileViewFactory
 {
     const int LMB = 0;
     readonly Vector2 VECTOR2_NONE = new Vector2(-10000, -10000);
 
-    public Transform TileView;
+    public Transform[] TileViews;
+    public string[] TileViewNames;
 
     private float minX;
     private float maxX;
@@ -23,13 +24,12 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
         this.maxX = bounds.max.x;
 	    this.maxY = bounds.max.y;
 
-        Debug.Log("MinX: " + minX);
-	    Debug.Log("MinY: " + minY);
-	    Debug.Log("MaxX: " + maxX);
-	    Debug.Log("MaxY: " + maxY);
+        //Debug.Log("MinX: " + minX);
+	    //Debug.Log("MinY: " + minY);
+	    //Debug.Log("MaxX: " + maxX);
+	    //Debug.Log("MaxY: " + maxY);
 
-        // Test: for now
-        BoardPresenter boardPresenter = new BoardPresenter(this, RNG.Instance, 5, 5, "Test", "Test2", "Test3");
+        BoardPresenter boardPresenter = new BoardPresenter(this, RNG.Instance, 5, 5, this.TileViewNames);
     }
 	
 	void Update ()
@@ -54,10 +54,14 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 
     private ITileView CreateAtLocation(IBoardPresenter presenter, string type, int x, int y, float startX, float startY)
     {
-        var viewTransform = Instantiate(this.TileView, new Vector3(startX, startY, 0.0f), Quaternion.identity);
-        var tileView = viewTransform.GetComponent<TileView>();
+        var index = Array.IndexOf(this.TileViewNames, type);
+        if(index < 0 || index >= this.TileViews.Length)
+        {
+            throw new IndexOutOfRangeException("no TileView found for type " + type);
+        }
 
-        // TODO: Use Type...
+        var viewTransform = Instantiate(this.TileViews[index], new Vector3(startX, startY, 0.0f), Quaternion.identity);
+        var tileView = viewTransform.GetComponent<TileView>();
 
         return tileView;
     }

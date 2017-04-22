@@ -24,7 +24,7 @@ public class RNG : IRandom
 
     public int GetRandomNumber(int inclusiveFrom, int exclusiveTo)
     {
-        return UnityEngine.Random.Range(inclusiveFrom, exclusiveTo - 1);
+        return UnityEngine.Random.Range(inclusiveFrom, exclusiveTo);
     }
 
     public int GetRandomNumber(int exclusiveTo)

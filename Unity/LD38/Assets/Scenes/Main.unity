@@ -224,7 +224,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c78138b2e443d046997b5f7c66c963b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TileView: {fileID: 4484004528203864, guid: 08657c1d311bc11439e3a74d1ac78142, type: 2}
+  TileViews:
+  - {fileID: 4453634787767514, guid: 212ae0c565a8f1d4f9e844129f7a368d, type: 2}
+  - {fileID: 4092523517563182, guid: aaa342828c643324d8239956084070bb, type: 2}
+  - {fileID: 4668006439425306, guid: c280abe8da084c24ab5dfffd211128dc, type: 2}
+  - {fileID: 4829800456629522, guid: c1b6f07b38e003446bdac74e58542607, type: 2}
+  TileViewNames:
+  - Ruby
+  - Emerald
+  - Sapphire
+  - Diamond
 --- !u!4 &1760733198
 Transform:
   m_ObjectHideFlags: 0
