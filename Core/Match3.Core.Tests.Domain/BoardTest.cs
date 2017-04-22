@@ -43,11 +43,14 @@ namespace Match3.Core.Tests.Domain {
         [Test]
         public void TestBoardCanDetectHorizontalMatches()
         {
-            // Given when
+            // Given
             const int width = 3;
             const int height = 3;
             BoardFactory boardFactory = new StubHorizontalMatchBoardFactory();
             var board = boardFactory.Generate(width, height);
+            
+            // When
+            board.CheckMatches();
 
             // Then
             Assert.AreEqual(1, board.Matches.Count());
@@ -62,11 +65,14 @@ namespace Match3.Core.Tests.Domain {
         [Test]
         public void TestBoardCanDetectVerticalMatches()
         {
-            // Given when
+            // Given
             const int width = 3;
             const int height = 3;
             BoardFactory boardFactory = new StubVerticalMatchBoardFactory();
             var board = boardFactory.Generate(width, height);
+
+            // When
+            board.CheckMatches();
 
             // Then
             Assert.AreEqual(1, board.Matches.Count());
@@ -86,6 +92,7 @@ namespace Match3.Core.Tests.Domain {
             const int height = 3;
             BoardFactory boardFactory = new StubVerticalMatchBoardFactory();
             var board = boardFactory.Generate(width, height);
+            board.CheckMatches();
 
             // When
             board.ClearMatches();
@@ -101,6 +108,7 @@ namespace Match3.Core.Tests.Domain {
             const int height = 3;
             BoardFactory boardFactory = new StubVerticalMatchBoardFactory();
             var board = boardFactory.Generate(width, height);
+            board.CheckMatches();
             var match = board.Matches.First();
 
             // When
