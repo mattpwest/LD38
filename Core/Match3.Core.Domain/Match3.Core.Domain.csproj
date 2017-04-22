@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="BoardFactory.cs" />
+    <Compile Include="Cell.cs" />
     <Compile Include="IRandom.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
