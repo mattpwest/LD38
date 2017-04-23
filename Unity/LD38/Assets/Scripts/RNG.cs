@@ -3,7 +3,6 @@ using UnityEngine;
 
 internal class RNG : IRandom
 {
-    private static RNG instance = null;
     private readonly int seed;
 
     internal int Seed
