@@ -23,6 +23,7 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
     private float maxY;
 
     private Transform tiles;
+    private ScoreView scoreView;
 
     private BoardPresenter currentGame;
     private int newWidth = -1;
@@ -42,9 +43,10 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 	{
 	    if(this.newWidth > 0 && this.currentGame == null)
 	    {
-	        var random = RNG.NewInstance(newSeed);
+	        this.scoreView = GameObject.FindWithTag("ScoreView").GetComponent<ScoreView>();
+            var random = RNG.NewInstance(newSeed);
 	        Debug.Log(string.Format("Starting game with seed: {0}", newSeed));
-	        this.currentGame = new BoardPresenter(ConsoleScore.NewInstance, ConsoleEndgame.NewInstance,
+	        this.currentGame = new BoardPresenter(this.scoreView, ConsoleEndgame.NewInstance,
                                                     this, random, this.newWidth, this.newHeight, this.TileViewNames);
         }
 	}
