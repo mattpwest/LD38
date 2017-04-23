@@ -29,7 +29,7 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 
 	    var random = RNG.NewInstance();
         Debug.Log(string.Format("Random Seed: {0}", random.Seed));
-	    new BoardPresenter(ConsoleScore.NewInstance, this, random, this.BoardWidth, this.BoardHeight, this.TileViewNames);
+	    new BoardPresenter(ConsoleScore.NewInstance, ConsoleEndgame.NewInstance, this, random, this.BoardWidth, this.BoardHeight, this.TileViewNames);
     }
 	
 	void Update ()

@@ -7,6 +7,7 @@ namespace Match3.Core.UI.Presenters
     public class BoardPresenter : IBoardPresenter
     {
         private readonly IScoreView scoreView;
+        private readonly IEndgamView endgameView;
         private readonly ITileViewFactory tileViewFactory;
         private readonly ITileView[,] tiles;
         private readonly HashSet<ITileView> fallingTiles;
@@ -28,7 +29,8 @@ namespace Match3.Core.UI.Presenters
         }
 
         public BoardPresenter(
-            IScoreView scoreView, 
+            IScoreView scoreView,
+            IEndgamView endgameView,
             ITileViewFactory tileViewFactory, 
             IRandom random,
             int boardWidth,
@@ -37,6 +39,7 @@ namespace Match3.Core.UI.Presenters
             : this()
         {
             this.scoreView = scoreView;
+            this.endgameView = endgameView;
             this.tileViewFactory = tileViewFactory;
             var tileGenerator = new RandomTileGenerator(random, tileTypes);
             this.tileGenerator = tileGenerator;
@@ -78,6 +81,11 @@ namespace Match3.Core.UI.Presenters
 
         public void Grabbed(ITileView tileView)
         {
+            if(!this.scoring.HasMovesLeft)
+            {
+                return;
+            }
+
             if(this.grabbedTile != null)
             {
                 return;
@@ -95,7 +103,12 @@ namespace Match3.Core.UI.Presenters
 
         public void Moved(ITileView callingTileView, int x, int y)
         {
-            if(this.grabbedTile != callingTileView)
+            if (!this.scoring.HasMovesLeft)
+            {
+                return;
+            }
+
+            if (this.grabbedTile != callingTileView)
             {
                 return;
             }
@@ -134,7 +147,12 @@ namespace Match3.Core.UI.Presenters
 
         public void Released(ITileView callingTileView)
         {
-            if(this.grabbedTile != callingTileView)
+            if (!this.scoring.HasMovesLeft)
+            {
+                return;
+            }
+
+            if (this.grabbedTile != callingTileView)
             {
                 return;
             }
@@ -188,6 +206,16 @@ namespace Match3.Core.UI.Presenters
         {
             if(!this.board.HasMatches)
             {
+                if(this.scoring.HasWon)
+                {
+                    this.endgameView.GameWon(this.scoring.CurrentScore);
+                }
+
+                if(this.scoring.HasLost)
+                {
+                    this.endgameView.GameLost(this.scoring.CurrentScore);
+                }
+
                 return;
             }
 
