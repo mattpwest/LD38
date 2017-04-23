@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class ConsoleScore : IScoreView
 {
-    private int score;
-    private int matchCount;
-
     public static IScoreView NewInstance
     {
         get
@@ -15,54 +12,41 @@ public class ConsoleScore : IScoreView
     }
 
     private ConsoleScore()
-    {
-        this.score = 0;
-        this.matchCount = 0;
+    {}
 
-        this.LogScoreAndMatches();
+    public void UpdateScore(int scoreDiff, int newScore)
+    {
+        var message = string.Format("Score: {0} ({1})", newScore, scoreDiff);
+        Debug.Log(message);
     }
 
-    public void Add(int score, int matchCount)
+    public void UpdateMatches(int matchesDiff, int matches)
     {
-        this.AddScoreWithoutLog(score);
-        this.AddMatchesWithoutLog(matchCount);
-
-        this.LogScoreAndMatches();
+        var message = string.Format("Matches: {0} ({1})", matches, matchesDiff);
+        Debug.Log(message);
     }
 
-    public void AddScore(int score)
+    public void UpdateMoves(int movesDiff, int moves)
     {
-        this.AddScoreWithoutLog(score);
-        this.LogScoreAndMatches();
+        var message = string.Format("Moves left: {0} ({1})", moves, movesDiff);
+        Debug.Log(message);
     }
 
-    public void AddMatches(int matchCount)
+    public void SetScore(int score)
     {
-        this.AddMatchesWithoutLog(matchCount);
-        this.LogScoreAndMatches();
+        var message = string.Format("Score: {0}", score);
+        Debug.Log(message);
     }
 
-    private void AddScoreWithoutLog(int score)
+    public void SetMatches(int matches)
     {
-        if(score == 0)
-        {
-            return;
-        }
-        this.score = this.score + score;
+        var message = string.Format("Matches: {0}", matches);
+        Debug.Log(message);
     }
 
-    private void AddMatchesWithoutLog(int matchCount)
+    public void SetMoves(int moves)
     {
-        if(matchCount == 0)
-        {
-            return;
-        }
-        this.matchCount = this.matchCount + matchCount;
-    }
-
-    private void LogScoreAndMatches()
-    {
-        var message = string.Format("Score: {0}\nMatches {1}", this.score, this.matchCount);
+        var message = string.Format("Moves left: {0}", moves);
         Debug.Log(message);
     }
 }

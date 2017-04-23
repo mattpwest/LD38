@@ -2,10 +2,16 @@
 {
     public interface IScoreView
     {
-        void Add(int score, int matchCount);
+        void UpdateScore(int scoreDiff, int score);
 
-        void AddScore(int score);
+        void UpdateMatches(int matchesDiff, int matches);
 
-        void AddMatches(int matchCount);
+        void UpdateMoves(int movesDiff, int moves);
+
+        void SetScore(int score);
+
+        void SetMatches(int matches);
+
+        void SetMoves(int moves);
     }
 }

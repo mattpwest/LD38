@@ -14,6 +14,7 @@ namespace Match3.Core.UI.Presenters
         private readonly Board board;
         private readonly ITileGenerator tileGenerator;
         private readonly int tileMatchValue;
+        private readonly Scoring scoring;
 
         private ITileView grabbedTile;
         private Move pendingMove;
@@ -67,6 +68,12 @@ namespace Match3.Core.UI.Presenters
                     this.fallingTiles.Add(this.tiles[x, y]);
                 }
             }
+
+
+            this.scoring = new Scoring(0, 0, 10);
+            this.scoreView.SetMoves(this.scoring.MovesAllowed - this.scoring.MovesMade);
+            this.scoreView.SetScore(this.scoring.CurrentScore);
+            this.scoreView.SetMatches(this.scoring.CurrentMatches);
         }
 
         public void Grabbed(ITileView tileView)
@@ -156,6 +163,9 @@ namespace Match3.Core.UI.Presenters
 
             this.HandleMatches();
 
+            this.scoring.MoveMade();
+            this.scoreView.UpdateMoves(-1, this.scoring.MovesAllowed - this.scoring.MovesMade);
+
             this.grabbedTile = null;
             this.pendingMove = null;
         }
@@ -192,7 +202,10 @@ namespace Match3.Core.UI.Presenters
                 scoreToAdd = scoreToAdd + match.Length * this.tileMatchValue;
             }
 
-            this.scoreView.Add(scoreToAdd, this.board.Matches.Count);
+            this.scoring.AddScore(scoreToAdd);
+            this.scoring.AddMatches(this.board.Matches.Count);
+            this.scoreView.UpdateScore(scoreToAdd, this.scoring.CurrentScore);
+            this.scoreView.UpdateMatches(this.board.Matches.Count, this.scoring.CurrentMatches);
 
             this.board.ClearMatches();
 
