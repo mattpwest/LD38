@@ -9,6 +9,7 @@ namespace Match3.Core.Domain
         private readonly int matchLength;
         private readonly Cell[,] cells;
         private readonly List<Match> matches;
+        private readonly IDictionary<int, Cell> previousBottomMatches;
 
         public int Width => this.cells.GetLength(0);
         public int Height => this.cells.GetLength(1);
@@ -18,6 +19,7 @@ namespace Match3.Core.Domain
         {
             this.matchLength = 3;
             this.matches = new List<Match>();
+            this.previousBottomMatches = new Dictionary<int, Cell>();
         }
 
         internal Board(int width, int height)
@@ -126,9 +128,22 @@ namespace Match3.Core.Domain
 
         public void ClearMatches()
         {
-            foreach(var matchedCells in this.Matches.SelectMany(x => x.MatchedCells))
+            foreach(var matchedCell in this.Matches.SelectMany(x => x.MatchedCells))
             {
-                matchedCells.Clear();
+                matchedCell.Clear();
+
+                if(!this.previousBottomMatches.ContainsKey(matchedCell.X))
+                {
+                    this.previousBottomMatches.Add(matchedCell.X, matchedCell);
+                    continue;
+                }
+
+                if(this.previousBottomMatches[matchedCell.X].Y < matchedCell.Y)
+                {
+                    continue;
+                }
+
+                this.previousBottomMatches[matchedCell.X] = matchedCell;
             }
 
             this.matches.Clear();
@@ -152,35 +167,29 @@ namespace Match3.Core.Domain
             this.cells[xEnd, yEnd].Tile = temp;
         }
 
-        public void FallTiles()
+        public IList<Fall> FallTiles()
         {
-            for(var x = 0; x < this.Width; x++)
+            var falls = new List<Fall>();
+            foreach(var cell in this.previousBottomMatches.Values)
             {
-                var emptyY = -1;
-                for(var y = 0; y < this.Height; y++)
+                int x = cell.X;
+                var emptyY = cell.Y;
+                for(int y = emptyY + 1; y < this.Height; y++)
                 {
-                    if(emptyY < 0 && !this.cells[x, y].IsEmpty)
-                    {
-                        continue;
-                    }
-
-                    if(emptyY < 0 && this.cells[x, y].IsEmpty)
-                    {
-                        emptyY = y;
-                        continue;
-                    }
-
                     if(this.cells[x, y].IsEmpty)
                     {
                         continue;
                     }
 
-                    var tileToFall = this.cells[x, y].Tile;
-                    this.cells[x, emptyY].Tile = tileToFall;
-                    this.cells[x, y].Clear();
+                    var from = this.cells[x, y];
+                    var to = this.cells[x, emptyY];
+                    falls.Add(new Fall(from, to));
                     emptyY++;
                 }
             }
+
+            this.previousBottomMatches.Clear();
+            return falls;
         }
 
         public void FillTiles(ITileGenerator tileGenerator)

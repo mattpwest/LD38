@@ -131,6 +131,15 @@ namespace Match3.Core.UI.Presenters
 
             this.board.ClearMatches();
 
+            var falls = this.board.FallTiles();
+
+            foreach(var fall in falls)
+            {
+                var tileViewToFall = this.tiles[fall.From.X, fall.From.Y];
+                this.tiles[fall.To.X, fall.To.Y] = tileViewToFall;
+                tileViewToFall.Fall(fall.To.X, fall.To.Y);
+            }
+
             //this.tiles[this.grabbedTile.X, this.grabbedTile.Y] = this.tiles[this.pendingMove.ToX, this.pendingMove.ToY];
             //this.tiles[this.pendingMove.ToX, this.pendingMove.ToY] = this.grabbedTile;
 

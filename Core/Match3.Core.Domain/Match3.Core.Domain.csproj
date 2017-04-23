@@ -37,6 +37,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="BoardFactory.cs" />
     <Compile Include="Cell.cs" />
+    <Compile Include="Fall.cs" />
     <Compile Include="HorizontalMatch.cs" />
     <Compile Include="IRandom.cs" />
     <Compile Include="Match.cs" />
