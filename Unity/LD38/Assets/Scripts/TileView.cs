@@ -16,9 +16,7 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
 
     private Vector2 targetPosition;
     private float minX;
-    private float maxX;
     private float minY;
-    private float maxY;
 
     private Vector2 dragStart;
     private bool falling;
@@ -28,8 +26,6 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
         var bounds = Camera.main.OrthographicBounds();
         this.minX = -bounds.max.x;
         this.minY = -bounds.max.y;
-        this.maxX = bounds.max.x;
-        this.maxY = bounds.max.y;
     }
 
     void Update()
@@ -68,7 +64,7 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
         this.Y = y;
     }
 
-    public void Destroy()
+    public void Destroy(int tileMatchValue)
     {
         Destroy(gameObject);
         // TODO: Add destroy FX

@@ -14,7 +14,7 @@ namespace Match3.Core.Domain
 
         public int Width => this.cells.GetLength(0);
         public int Height => this.cells.GetLength(1);
-        public IEnumerable<Match> Matches => this.matches;
+        public IList<Match> Matches => this.matches;
 
         private Board()
         {
