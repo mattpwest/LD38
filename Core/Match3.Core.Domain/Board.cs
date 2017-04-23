@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Match3.Core.Domain
 {
@@ -56,90 +57,68 @@ namespace Match3.Core.Domain
                         continue;
                     }
 
-                    var tileToMatch = cellToCheck.Tile;
-                    var horizontalMatchStart = x;
-                    var horizontalMatchEnd = x;
-                    var verticalMatchStart = y;
-                    var verticalMatchEnd = y;
-
                     if(cellToCheck.IsHorizontalDirty)
                     {
+                        var horizontalMatch = new HorizontalMatch(cellToCheck);
                         for (var xToFind = x - 1; xToFind >= 0; xToFind--)
                         {
                             var cell = this.cells[xToFind, y];
-                            if (cell.IsEmpty || tileToMatch != cell.Tile)
-                            {
-                                break;
-                            }
 
-                            if (cell.IsHorizontalDirty)
-                            {
-                                cell.MarkHorizontalClean();
-                            }
+                            var match = horizontalMatch.MatchTo(cell);
 
-                            horizontalMatchStart = xToFind;
+                            if(match)
+                            {
+                                continue;
+                            }
+                            break;
                         }
                         for (var xToFind = x + 1; xToFind < this.Width; xToFind++)
                         {
                             var cell = this.cells[xToFind, y];
-                            if (cell.IsEmpty || tileToMatch != cell.Tile)
-                            {
-                                break;
-                            }
+                            var match = horizontalMatch.MatchTo(cell);
 
-                            if (cell.IsHorizontalDirty)
+                            if (match)
                             {
-                                cell.MarkHorizontalClean();
+                                continue;
                             }
-
-                            horizontalMatchEnd = xToFind;
+                            break;
                         }
-                        cellToCheck.MarkHorizontalClean();
+
+                        if(horizontalMatch.Length >= 3)
+                        {
+                            this.matches.Add(horizontalMatch);
+                        }
                     }
                     if(cellToCheck.IsVerticalDirty)
                     {
+                        var verticalMatch = new VerticalMatch(cellToCheck);
                         for (int yToFind = y - 1; yToFind >= 0; yToFind--)
                         {
                             var cell = this.cells[x, yToFind];
-                            if (cell.IsEmpty || tileToMatch != cell.Tile)
-                            {
-                                break;
-                            }
+                            var match = verticalMatch.MatchTo(cell);
 
-                            if (cell.IsVerticalDirty)
+                            if (match)
                             {
-                                cell.MarkVerticalClean();
+                                continue;
                             }
-
-                            verticalMatchStart = yToFind;
+                            break;
                         }
                         for (int yToFind = y + 1; yToFind < this.Height; yToFind++)
                         {
                             var cell = this.cells[x, yToFind];
-                            if (cell.IsEmpty || tileToMatch != cell.Tile)
-                            {
-                                break;
-                            }
+                            var match = verticalMatch.MatchTo(cell);
 
-                            if (cell.IsVerticalDirty)
+                            if (match)
                             {
-                                cell.MarkVerticalClean();
+                                continue;
                             }
-                            verticalMatchEnd = yToFind;
+                            break;
                         }
-                        cellToCheck.MarkVerticalClean();
-                    }
 
-                    if (horizontalMatchEnd - horizontalMatchStart + 1 >= this.matchLength)
-                    {
-                        var horizontalMatch = new Match(horizontalMatchStart, y, horizontalMatchEnd, y);
-                        this.matches.Add(horizontalMatch);
-                    }
-
-                    if (verticalMatchEnd - verticalMatchStart + 1 >= this.matchLength)
-                    {
-                        var verticalMatch = new Match(x, verticalMatchStart, x, verticalMatchEnd);
-                        this.matches.Add(verticalMatch);
+                        if(verticalMatch.Length >= this.matchLength)
+                        {
+                            this.matches.Add(verticalMatch);
+                        }
                     }
                 }
             }
@@ -147,15 +126,9 @@ namespace Match3.Core.Domain
 
         public void ClearMatches()
         {
-            foreach(var match in this.Matches)
+            foreach(var matchedCells in this.Matches.SelectMany(x => x.MatchedCells))
             {
-                for(int x = match.StartX; x <= match.EndX; x++)
-                {
-                    for(int y = match.StartY; y <= match.EndY; y++)
-                    {
-                        this.cells[x, y].Clear();
-                    }
-                }
+                matchedCells.Clear();
             }
 
             this.matches.Clear();

@@ -2,7 +2,7 @@
 
 namespace Match3.Core.Domain
 {
-    internal class Cell
+    public class Cell
     {
         private Tile tile;
 

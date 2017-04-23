@@ -114,7 +114,7 @@ namespace Match3.Core.UI.Presenters
 
             this.board.Move(this.pendingMove.FromX, this.pendingMove.FromY, this.pendingMove.ToX, this.pendingMove.ToY);
 
-            this.board.CheckMatches();
+            this.board.CheckMatches(); 
 
             if (!this.board.Matches.Any()) {
                 var tileToUndo = this.tiles[this.pendingMove.FromX, this.pendingMove.FromY];
@@ -124,17 +124,9 @@ namespace Match3.Core.UI.Presenters
                 this.tiles[this.pendingMove.FromX, this.pendingMove.FromY] = this.grabbedTile;
             }
 
-            foreach(var match in this.board.Matches)
+            foreach(var matchedCell in this.board.Matches.SelectMany(x => x.MatchedCells))
             {
-                for(var i = 0; i < match.Length; i++)
-                {
-                    var xModifier = match.StartX == match.EndX ? 0 : i;
-                    var yModifier = match.StartY == match.EndY ? 0 : i;
-                    var x = Math.Min(match.StartX, match.EndX) + xModifier;
-                    var y = Math.Min(match.StartY, match.EndY) + yModifier;
-
-                    this.tiles[x, y].Destroy();
-                }
+                this.tiles[matchedCell.X, matchedCell.Y].Destroy();
             }
 
             this.board.ClearMatches();

@@ -23,6 +23,6 @@ namespace Match3.Core.UI.Presenters
         {
             var tileIndex = this.random.GetRandomNumber(this.tiles.Length);
             return this.tiles[tileIndex];
-        }
+        } 
     }
 }
