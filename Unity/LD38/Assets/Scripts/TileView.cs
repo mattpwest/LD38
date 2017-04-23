@@ -64,7 +64,6 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
     {
         this.X = x;
         this.Y = y;
-        this.baseX = this.baseX - (this.OriginalX - this.X);
     }
 
     public void Destroy(int tileMatchValue)

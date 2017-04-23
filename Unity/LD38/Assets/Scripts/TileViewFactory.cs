@@ -44,7 +44,8 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 	    {
 	        var random = RNG.NewInstance(newSeed);
 	        Debug.Log(string.Format("Starting game with seed: {0}", newSeed));
-	        this.currentGame = new BoardPresenter(ConsoleScore.NewInstance, this, random, this.newWidth, this.newHeight, this.TileViewNames);
+	        this.currentGame = new BoardPresenter(ConsoleScore.NewInstance, ConsoleEndgame.NewInstance,
+                                                    this, random, this.newWidth, this.newHeight, this.TileViewNames);
         }
 	}
 
