@@ -14,16 +14,12 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
     public int BoardHeight = 5;
 
     private float minX;
-    private float maxX;
-    private float minY;
     private float maxY;
 
 	void Start ()
 	{
 	    var bounds = Camera.main.OrthographicBounds();
 	    this.minX = -bounds.max.x;
-	    this.minY = -bounds.max.y;
-        this.maxX = bounds.max.x;
 	    this.maxY = bounds.max.y;
 
         //Debug.Log("MinX: " + minX);
@@ -31,7 +27,7 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 	    //Debug.Log("MaxX: " + maxX);
 	    //Debug.Log("MaxY: " + maxY);
 
-        BoardPresenter boardPresenter = new BoardPresenter(this, RNG.Instance, this.BoardWidth, this.BoardHeight, this.TileViewNames);
+        new BoardPresenter(ConsoleScore.NewInstance, this, RNG.Instance, this.BoardWidth, this.BoardHeight, this.TileViewNames);
     }
 	
 	void Update ()

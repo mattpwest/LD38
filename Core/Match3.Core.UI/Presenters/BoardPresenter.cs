@@ -7,24 +7,30 @@ namespace Match3.Core.UI.Presenters
 {
     public class BoardPresenter : IBoardPresenter
     {
+        private readonly IScoreView scoreView;
         private readonly ITileViewFactory tileViewFactory;
-        private readonly Board board;
         private readonly ITileView[,] tiles;
-        private readonly ITileGenerator tileGenerator;
         private readonly HashSet<ITileView> fallingTiles;
+
+        private readonly Board board;
+        private readonly ITileGenerator tileGenerator;
+        private readonly int tileMatchValue;
 
         private ITileView grabbedTile;
         private Move pendingMove;
 
         private BoardPresenter()
         {
+            this.tileMatchValue = 60;
+
             this.grabbedTile = null;
             this.fallingTiles = new HashSet<ITileView>();
         }
 
-        public BoardPresenter(ITileViewFactory tileViewFactory, IRandom random, int boardWidth, int boardHeight, params string[] tileTypes)
+        public BoardPresenter(IScoreView scoreView, ITileViewFactory tileViewFactory, IRandom random, int boardWidth, int boardHeight, params string[] tileTypes)
             : this()
         {
+            this.scoreView = scoreView;
             this.tileViewFactory = tileViewFactory;
             var tileGenerator = new RandomTileGenerator(random, tileTypes);
             this.tileGenerator = tileGenerator;
@@ -145,9 +151,20 @@ namespace Match3.Core.UI.Presenters
                 return;
             }
 
-            foreach(var matchedCell in this.board.Matches.SelectMany(x => x.MatchedCells))
+            if (this.board.Matches.Count > 0)
             {
-                this.tiles[matchedCell.X, matchedCell.Y].Destroy();
+                var scoreToAdd = 0;
+
+                foreach (var match in this.board.Matches)
+                {
+                    foreach (var matchedCell in match.MatchedCells)
+                    {
+                        this.tiles[matchedCell.X, matchedCell.Y].Destroy(this.tileMatchValue);
+                    }
+                    scoreToAdd = scoreToAdd + match.Length * this.tileMatchValue;
+                }
+
+                this.scoreView.Add(scoreToAdd, this.board.Matches.Count);
             }
 
             this.board.ClearMatches();
@@ -185,9 +202,20 @@ namespace Match3.Core.UI.Presenters
 
             this.board.CheckMatches();
 
-            foreach (var matchedCell in this.board.Matches.SelectMany(x => x.MatchedCells))
+            if (this.board.Matches.Count > 0)
             {
-                this.tiles[matchedCell.X, matchedCell.Y].Destroy();
+                var scoreToAdd = 0;
+
+                foreach (var match in this.board.Matches)
+                {
+                    foreach (var matchedCell in match.MatchedCells)
+                    {
+                        this.tiles[matchedCell.X, matchedCell.Y].Destroy(this.tileMatchValue);
+                    }
+                    scoreToAdd = scoreToAdd + match.Length * this.tileMatchValue;
+                }
+
+                this.scoreView.Add(scoreToAdd, this.board.Matches.Count);
             }
 
             this.board.ClearMatches();
