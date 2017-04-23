@@ -201,6 +201,8 @@
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">Sprites/Diamond.png</key>
             <key type="filename">Sprites/Emerald.png</key>
+            <key type="filename">Sprites/GreenPin.png</key>
+            <key type="filename">Sprites/RedPin.png</key>
             <key type="filename">Sprites/Ruby.png</key>
             <key type="filename">Sprites/Sapphire.png</key>
             <struct type="IndividualSpriteSettings">

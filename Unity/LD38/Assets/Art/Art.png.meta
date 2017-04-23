@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a106e13747c4f9f46bd84546b7675b8a
-timeCreated: 1492864183
+timeCreated: 1492937795
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,11 @@ TextureImporter:
     21300002: Diamond
     21300004: Emerald
     21300006: Sapphire
+    21300008: GreenPin
+    21300010: RedPin
+    21300012: WoodPanel
+    21300014: LiveTree
+    21300016: Blood Recticle
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -74,11 +79,24 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+      name: Blood Recticle
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 45
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: Diamond
       rect:
         serializedVersion: 2
         x: 1
-        y: 95
+        y: 11
         width: 32
         height: 32
       alignment: 0
@@ -90,8 +108,47 @@ TextureImporter:
       name: Emerald
       rect:
         serializedVersion: 2
+        x: 35
+        y: 45
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: GreenPin
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 11
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: LiveTree
+      rect:
+        serializedVersion: 2
         x: 1
-        y: 61
+        y: 79
+        width: 47
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5106383, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: RedPin
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 95
         width: 32
         height: 32
       alignment: 0
@@ -103,8 +160,8 @@ TextureImporter:
       name: Ruby
       rect:
         serializedVersion: 2
-        x: 1
-        y: 27
+        x: 84
+        y: 95
         width: 32
         height: 32
       alignment: 0
@@ -116,13 +173,26 @@ TextureImporter:
       name: Sapphire
       rect:
         serializedVersion: 2
-        x: 35
-        y: 95
+        x: 69
+        y: 61
         width: 32
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: WoodPanel
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 27
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
       outline: []
       tessellationDetail: -1
     outline: []
