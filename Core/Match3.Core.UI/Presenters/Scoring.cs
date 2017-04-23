@@ -25,7 +25,11 @@ namespace Match3.Core.UI.Presenters
 
         public bool HasMovesLeft => this.MovesMade < this.MovesAllowed;
         public bool HasWon => this.WonCase1 || this.WonCase2 || this.WonCase3 || this.WonCase4;
-        public bool HasLost => this.MovesAllowedReached && !this.ScoreBeat && !this.MatchesBeat;
+        public bool HasLost => this.MovesAllowedReached && (this.LoseCase1 || this.LoseCase2 || this.LoseCase3);
+
+        private bool LoseCase1 => !this.ScoreBeat && !this.MatchesBeat;
+        private bool LoseCase2 => this.IgnoreScore && !this.MatchesBeat;
+        private bool LoseCase3 => !this.ScoreBeat && this.IgnoreMatches;
 
         private Scoring()
         {
