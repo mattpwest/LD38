@@ -45,6 +45,7 @@
     <Compile Include="Presenters\RandomTileGenerator.cs" />
     <Compile Include="Presenters\Scoring.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\IEndgamView.cs" />
     <Compile Include="Views\IScoreView.cs" />
     <Compile Include="Views\ITileView.cs" />
     <Compile Include="Views\ITileViewFactory.cs" />
