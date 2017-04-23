@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Match3.Core.Domain
 {
@@ -14,6 +13,7 @@ namespace Match3.Core.Domain
 
         public int Width => this.cells.GetLength(0);
         public int Height => this.cells.GetLength(1);
+        public bool HasMatches => this.matches.Count > 0;
         public IList<Match> Matches => this.matches;
 
         private Board()
@@ -126,22 +126,25 @@ namespace Match3.Core.Domain
 
         public void ClearMatches()
         {
-            foreach(var matchedCell in this.Matches.SelectMany(x => x.MatchedCells))
+            foreach(var match in this.matches)
             {
-                matchedCell.Clear();
-
-                if(!this.previousBottomMatches.ContainsKey(matchedCell.X))
+                foreach(var matchedCell in match.MatchedCells)
                 {
-                    this.previousBottomMatches.Add(matchedCell.X, matchedCell);
-                    continue;
-                }
+                    matchedCell.Clear();
 
-                if(this.previousBottomMatches[matchedCell.X].Y < matchedCell.Y)
-                {
-                    continue;
-                }
+                    if (!this.previousBottomMatches.ContainsKey(matchedCell.X))
+                    {
+                        this.previousBottomMatches.Add(matchedCell.X, matchedCell);
+                        continue;
+                    }
 
-                this.previousBottomMatches[matchedCell.X] = matchedCell;
+                    if (this.previousBottomMatches[matchedCell.X].Y < matchedCell.Y)
+                    {
+                        continue;
+                    }
+
+                    this.previousBottomMatches[matchedCell.X] = matchedCell;
+                }
             }
 
             this.matches.Clear();
@@ -149,7 +152,7 @@ namespace Match3.Core.Domain
 
         public void Move(int xStart, int yStart, int xEnd, int yEnd)
         {
-            if(this.Matches.Any())
+            if(this.HasMatches)
             {
                 throw new InvalidOperationException("Can't make move until matches have been resolved");
             }

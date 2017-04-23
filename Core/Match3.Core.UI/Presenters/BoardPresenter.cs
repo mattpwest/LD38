@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Match3.Core.Domain;
 using Match3.Core.UI.Views;
 
@@ -27,7 +26,13 @@ namespace Match3.Core.UI.Presenters
             this.fallingTiles = new HashSet<ITileView>();
         }
 
-        public BoardPresenter(IScoreView scoreView, ITileViewFactory tileViewFactory, IRandom random, int boardWidth, int boardHeight, params string[] tileTypes)
+        public BoardPresenter(
+            IScoreView scoreView, 
+            ITileViewFactory tileViewFactory, 
+            IRandom random,
+            int boardWidth,
+            int boardHeight,
+            params string[] tileTypes)
             : this()
         {
             this.scoreView = scoreView;
@@ -39,7 +44,7 @@ namespace Match3.Core.UI.Presenters
             this.board = boardFactory.Generate(boardWidth, boardHeight);
             this.board.CheckMatches();
 
-            while(this.board.Matches.Any())
+            while(this.board.HasMatches)
             {
                 this.board.ClearMatches();
 
@@ -71,13 +76,15 @@ namespace Match3.Core.UI.Presenters
                 return;
             }
 
-            if(this.fallingTiles.Any())
+            if(this.HasTilesFalling)
             {
                 return;
             }
 
             this.grabbedTile = tileView;
         }
+
+        private bool HasTilesFalling => this.fallingTiles.Count > 0;
 
         public void Moved(ITileView callingTileView, int x, int y)
         {
@@ -86,7 +93,7 @@ namespace Match3.Core.UI.Presenters
                 return;
             }
 
-            if(this.fallingTiles.Any())
+            if(this.HasTilesFalling)
             {
                 return;
             }
@@ -106,12 +113,7 @@ namespace Match3.Core.UI.Presenters
 
             if(this.pendingMove != null)
             {
-                var tileToUndo = this.tiles[this.pendingMove.FromX, this.pendingMove.FromY];
-                tileToUndo.Move(this.pendingMove.ToX, this.pendingMove.ToY);
-                this.tiles[this.pendingMove.ToX, this.pendingMove.ToY] = tileToUndo;
-                this.grabbedTile.Move(this.pendingMove.FromX, this.pendingMove.FromY);
-                this.tiles[this.pendingMove.FromX, this.pendingMove.FromY] = this.grabbedTile;
-                this.pendingMove = null;
+                this.UndoPendingMove();
                 return;
             }
 
@@ -130,6 +132,11 @@ namespace Match3.Core.UI.Presenters
                 return;
             }
 
+            if(this.HasTilesFalling)
+            {
+                return;
+            }
+
             if(this.pendingMove == null)
             {
                 this.grabbedTile = null;
@@ -138,34 +145,54 @@ namespace Match3.Core.UI.Presenters
 
             this.board.Move(this.pendingMove.FromX, this.pendingMove.FromY, this.pendingMove.ToX, this.pendingMove.ToY);
 
-            this.board.CheckMatches(); 
+            this.board.CheckMatches();
 
-            if (!this.board.Matches.Any()) {
-                var tileToUndo = this.tiles[this.pendingMove.FromX, this.pendingMove.FromY];
-                tileToUndo.Move(this.pendingMove.ToX, this.pendingMove.ToY);
-                this.tiles[this.pendingMove.ToX, this.pendingMove.ToY] = tileToUndo;
-                this.grabbedTile.Move(this.pendingMove.FromX, this.pendingMove.FromY);
-                this.tiles[this.pendingMove.FromX, this.pendingMove.FromY] = this.grabbedTile;
-                this.pendingMove = null;
+            if(!this.board.HasMatches)
+            {
+                this.UndoPendingMove();
                 this.grabbedTile = null;
                 return;
             }
 
-            if (this.board.Matches.Count > 0)
+            this.HandleMatches();
+
+            this.grabbedTile = null;
+            this.pendingMove = null;
+        }
+
+        public void StoppedFalling(ITileView callingTileView)
+        {
+            this.fallingTiles.Remove(callingTileView);
+
+            if(this.HasTilesFalling)
             {
-                var scoreToAdd = 0;
-
-                foreach (var match in this.board.Matches)
-                {
-                    foreach (var matchedCell in match.MatchedCells)
-                    {
-                        this.tiles[matchedCell.X, matchedCell.Y].Destroy(this.tileMatchValue);
-                    }
-                    scoreToAdd = scoreToAdd + match.Length * this.tileMatchValue;
-                }
-
-                this.scoreView.Add(scoreToAdd, this.board.Matches.Count);
+                return;
             }
+
+            this.board.CheckMatches();
+
+            this.HandleMatches();
+        }
+
+        private void HandleMatches()
+        {
+            if(!this.board.HasMatches)
+            {
+                return;
+            }
+
+            var scoreToAdd = 0;
+
+            foreach(var match in this.board.Matches)
+            {
+                foreach(var matchedCell in match.MatchedCells)
+                {
+                    this.tiles[matchedCell.X, matchedCell.Y].Destroy(this.tileMatchValue);
+                }
+                scoreToAdd = scoreToAdd + match.Length * this.tileMatchValue;
+            }
+
+            this.scoreView.Add(scoreToAdd, this.board.Matches.Count);
 
             this.board.ClearMatches();
 
@@ -186,56 +213,16 @@ namespace Match3.Core.UI.Presenters
                 this.tiles[spawn.X, spawn.Y].Fall(spawn.X, spawn.Y);
                 this.fallingTiles.Add(this.tiles[spawn.X, spawn.Y]);
             }
-
-            this.grabbedTile = null;
-            this.pendingMove = null;
         }
 
-        public void StoppedFalling(ITileView callingTileView)
+        private void UndoPendingMove()
         {
-            this.fallingTiles.Remove(callingTileView);
-
-            if(this.fallingTiles.Count > 0)
-            {
-                return;
-            }
-
-            this.board.CheckMatches();
-
-            if (this.board.Matches.Count > 0)
-            {
-                var scoreToAdd = 0;
-
-                foreach (var match in this.board.Matches)
-                {
-                    foreach (var matchedCell in match.MatchedCells)
-                    {
-                        this.tiles[matchedCell.X, matchedCell.Y].Destroy(this.tileMatchValue);
-                    }
-                    scoreToAdd = scoreToAdd + match.Length * this.tileMatchValue;
-                }
-
-                this.scoreView.Add(scoreToAdd, this.board.Matches.Count);
-            }
-
-            this.board.ClearMatches();
-
-            var falls = this.board.FallTiles();
-
-            foreach (var fall in falls)
-            {
-                var tileViewToFall = this.tiles[fall.From.X, fall.From.Y];
-                this.tiles[fall.To.X, fall.To.Y] = tileViewToFall;
-                tileViewToFall.Fall(fall.To.X, fall.To.Y);
-            }
-
-            var spawns = this.board.FillTiles(this.tileGenerator);
-
-            foreach (var spawn in spawns)
-            {
-                this.tiles[spawn.X, spawn.Y] = this.tileViewFactory.CreateInitial(this, spawn.Tile.Type, spawn.X, spawn.Y);
-                this.tiles[spawn.X, spawn.Y].Fall(spawn.X, spawn.Y);
-            }
+            var tileToUndo = this.tiles[this.pendingMove.FromX, this.pendingMove.FromY];
+            tileToUndo.Move(this.pendingMove.ToX, this.pendingMove.ToY);
+            this.tiles[this.pendingMove.ToX, this.pendingMove.ToY] = tileToUndo;
+            this.grabbedTile.Move(this.pendingMove.FromX, this.pendingMove.FromY);
+            this.tiles[this.pendingMove.FromX, this.pendingMove.FromY] = this.grabbedTile;
+            this.pendingMove = null;
         }
     }
 }

@@ -27,7 +27,9 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 	    //Debug.Log("MaxX: " + maxX);
 	    //Debug.Log("MaxY: " + maxY);
 
-        new BoardPresenter(ConsoleScore.NewInstance, this, RNG.Instance, this.BoardWidth, this.BoardHeight, this.TileViewNames);
+	    var random = RNG.NewInstance();
+        Debug.Log(string.Format("Random Seed: {0}", random.Seed));
+	    new BoardPresenter(ConsoleScore.NewInstance, this, random, this.BoardWidth, this.BoardHeight, this.TileViewNames);
     }
 	
 	void Update ()
