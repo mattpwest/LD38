@@ -10,6 +10,8 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 
     public Transform[] TileViews;
     public string[] TileViewNames;
+    public int BoardWidth = 5;
+    public int BoardHeight = 5;
 
     private float minX;
     private float maxX;
@@ -29,7 +31,7 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 	    //Debug.Log("MaxX: " + maxX);
 	    //Debug.Log("MaxY: " + maxY);
 
-        BoardPresenter boardPresenter = new BoardPresenter(this, RNG.Instance, 5, 5, this.TileViewNames);
+        BoardPresenter boardPresenter = new BoardPresenter(this, RNG.Instance, this.BoardWidth, this.BoardHeight, this.TileViewNames);
     }
 	
 	void Update ()
