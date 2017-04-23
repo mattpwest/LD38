@@ -13,7 +13,7 @@ namespace Match3.Core.Domain
         public Tile Tile
         {
             get => this.tile;
-            set
+            internal set
             {
                 if(value == null)
                 {

@@ -10,6 +10,7 @@ namespace Match3.Core.Domain
         private readonly Cell[,] cells;
         private readonly List<Match> matches;
         private readonly IDictionary<int, Cell> previousBottomMatches;
+        private readonly IDictionary<int, Cell> bottomEmptyCells;
 
         public int Width => this.cells.GetLength(0);
         public int Height => this.cells.GetLength(1);
@@ -20,6 +21,7 @@ namespace Match3.Core.Domain
             this.matchLength = 3;
             this.matches = new List<Match>();
             this.previousBottomMatches = new Dictionary<int, Cell>();
+            this.bottomEmptyCells = new Dictionary<int, Cell>();
         }
 
         internal Board(int width, int height)
@@ -41,20 +43,15 @@ namespace Match3.Core.Domain
             return this.cells[x, y].Tile;
         }
 
-        internal void SetTile(int x, int y, Tile tile)
-        {
-            this.cells[x, y].Tile = tile;
-        }
-
         public void CheckMatches()
-         {
+        {
             for(int x = 0; x < this.Width; x++)
             {
                 for(int y = 0; y < this.Height; y++)
                 {
                     var cellToCheck = this.cells[x, y];
 
-                    if (!cellToCheck.IsDirty || cellToCheck.IsEmpty)
+                    if(!cellToCheck.IsDirty || cellToCheck.IsEmpty)
                     {
                         continue;
                     }
@@ -62,7 +59,7 @@ namespace Match3.Core.Domain
                     if(cellToCheck.IsHorizontalDirty)
                     {
                         var horizontalMatch = new HorizontalMatch(cellToCheck);
-                        for (var xToFind = x - 1; xToFind >= 0; xToFind--)
+                        for(var xToFind = x - 1; xToFind >= 0; xToFind--)
                         {
                             var cell = this.cells[xToFind, y];
 
@@ -74,12 +71,12 @@ namespace Match3.Core.Domain
                             }
                             break;
                         }
-                        for (var xToFind = x + 1; xToFind < this.Width; xToFind++)
+                        for(var xToFind = x + 1; xToFind < this.Width; xToFind++)
                         {
                             var cell = this.cells[xToFind, y];
                             var match = horizontalMatch.MatchTo(cell);
 
-                            if (match)
+                            if(match)
                             {
                                 continue;
                             }
@@ -91,26 +88,27 @@ namespace Match3.Core.Domain
                             this.matches.Add(horizontalMatch);
                         }
                     }
+
                     if(cellToCheck.IsVerticalDirty)
                     {
                         var verticalMatch = new VerticalMatch(cellToCheck);
-                        for (int yToFind = y - 1; yToFind >= 0; yToFind--)
+                        for(int yToFind = y - 1; yToFind >= 0; yToFind--)
                         {
                             var cell = this.cells[x, yToFind];
                             var match = verticalMatch.MatchTo(cell);
 
-                            if (match)
+                            if(match)
                             {
                                 continue;
                             }
                             break;
                         }
-                        for (int yToFind = y + 1; yToFind < this.Height; yToFind++)
+                        for(int yToFind = y + 1; yToFind < this.Height; yToFind++)
                         {
                             var cell = this.cells[x, yToFind];
                             var match = verticalMatch.MatchTo(cell);
 
-                            if (match)
+                            if(match)
                             {
                                 continue;
                             }
@@ -151,6 +149,11 @@ namespace Match3.Core.Domain
 
         public void Move(int xStart, int yStart, int xEnd, int yEnd)
         {
+            if(this.Matches.Any())
+            {
+                throw new InvalidOperationException("Can't make move until matches have been resolved");
+            }
+
             var xDiff = Math.Abs(xEnd - xStart);
             var yDiff = Math.Abs(yEnd - yStart);
             if(xDiff > 1 || yDiff > 1)
@@ -162,9 +165,17 @@ namespace Match3.Core.Domain
                 throw new InvalidOperationException("Tiles can not be diagonal");
             }
 
-            var temp = this.cells[xStart, yStart].Tile;
-            this.cells[xStart, yStart].Tile = this.cells[xEnd, yEnd].Tile;
-            this.cells[xEnd, yEnd].Tile = temp;
+            var start = this.cells[xStart, yStart];
+            var end = this.cells[xEnd, yEnd];
+
+            if(start.Tile == end.Tile)
+            {
+                return;
+            }
+
+            var temp = start.Tile;
+            start.Tile = end.Tile;
+            end.Tile = temp;
         }
 
         public IList<Fall> FallTiles()
@@ -186,49 +197,40 @@ namespace Match3.Core.Domain
                     falls.Add(new Fall(from, to));
                     emptyY++;
                 }
+
+                if(emptyY >= this.Height)
+                {
+                    continue;
+                }
+
+                this.bottomEmptyCells.Add(x, this.cells[x, emptyY]);
             }
 
             this.previousBottomMatches.Clear();
             return falls;
         }
 
-        public void FillTiles(ITileGenerator tileGenerator)
+        public IList<Cell> FillTiles(ITileGenerator tileGenerator)
         {
-            this.FillTiles(tileGenerator, 0);
-        }
-
-        private void FillTiles(ITileGenerator tileGenerator, int x)
-        {
-            if(x >= this.Width)
+            var spawns = new List<Cell>();
+            foreach(var cell in this.bottomEmptyCells.Values)
             {
-                return;
+                int x = cell.X;
+                for(int y = cell.Y; y < this.Height; y++)
+                {
+                    var emptyCell = this.cells[x, y];
+                    emptyCell.Tile = tileGenerator.GenerateTile();
+                    spawns.Add(emptyCell);
+                }
             }
 
-            this.FillTiles(tileGenerator, x, this.Height - 1);
-
-            this.FillTiles(tileGenerator, x + 1);
+            this.bottomEmptyCells.Clear();
+            return spawns;
         }
 
-        private void FillTiles(ITileGenerator tileGenerator, int x, int y)
+        internal Cell GetCell(int x, int y)
         {
-            if(y < 0)
-            {
-                return;
-            }
-
-            if(!this.cells[x, y].IsEmpty)
-            {
-                return;
-            }
-
-            this.FillTiles(tileGenerator, x, y - 1);
-
-            this.SetTile(x, y, tileGenerator.GenerateTile());
+            return this.cells[x, y];
         }
-    }
-
-    public interface ITileGenerator
-    {
-        Tile GenerateTile();
     }
 }
