@@ -313,6 +313,8 @@ MonoBehaviour:
   - BlueCan
   - WhitePaper
   - YellowCake
+  BoardWidth: 10
+  BoardHeight: 10
 --- !u!4 &1760733198
 Transform:
   m_ObjectHideFlags: 0

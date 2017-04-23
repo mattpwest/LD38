@@ -2,7 +2,7 @@
 
 namespace Match3.Core.Domain
 {
-    internal class Cell
+    public class Cell
     {
         private Tile tile;
 
@@ -13,7 +13,7 @@ namespace Match3.Core.Domain
         public Tile Tile
         {
             get => this.tile;
-            set
+            internal set
             {
                 if(value == null)
                 {

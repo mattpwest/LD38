@@ -9,5 +9,7 @@ namespace Match3.Core.UI.Presenters
         void Moved(ITileView callingTileView, int x, int y);
 
         void Released(ITileView callingTileView);
+
+        void StoppedFalling(ITileView callingTileView);
     }
 }

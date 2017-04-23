@@ -7,6 +7,6 @@
 
         void Move(int x, int y);
 
-        void Destroy();
+        void Destroy(int tileMatchValue);
     }
 }

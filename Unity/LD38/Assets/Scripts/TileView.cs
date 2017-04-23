@@ -1,4 +1,5 @@
-﻿using Match3.Core.UI.Presenters;
+﻿using System;
+using Match3.Core.UI.Presenters;
 using Match3.Core.UI.Views;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,36 +16,46 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
 
     private Vector2 targetPosition;
     private float minX;
-    private float maxX;
     private float minY;
-    private float maxY;
 
     private Vector2 dragStart;
+    private bool falling;
 
     void Start()
     {
         var bounds = Camera.main.OrthographicBounds();
         this.minX = -bounds.max.x;
         this.minY = -bounds.max.y;
-        this.maxX = bounds.max.x;
-        this.maxY = bounds.max.y;
     }
 
     void Update()
     {
         this.targetPosition = new Vector2(this.minX + 0.5f + X * 1.0f, this.minY + 0.5f + Y * 1.0f);
 
-        Vector2 currentPosition = (Vector2)this.transform.position;
-        if(!currentPosition.Equals(this.targetPosition))
+        Vector2 currentPosition = this.transform.position;
+
+        var distanceFromTarge = this.targetPosition - currentPosition;
+        if(!(Math.Abs(distanceFromTarge.sqrMagnitude) < 0.0005f))
         {
+
             this.transform.position = currentPosition + (this.targetPosition - currentPosition) * 0.1f;
+            return;
         }
+
+        if(!this.falling)
+        {
+            return;
+        }
+
+        this.falling = false;
+        this.Presenter.StoppedFalling(this);
     }
 
     public void Fall(int x, int y)
     {
         this.X = x;
         this.Y = y;
+        this.falling = true;
     }
 
     public void Move(int x, int y)
@@ -53,7 +64,7 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
         this.Y = y;
     }
 
-    public void Destroy()
+    public void Destroy(int tileMatchValue)
     {
         Destroy(gameObject);
         // TODO: Add destroy FX

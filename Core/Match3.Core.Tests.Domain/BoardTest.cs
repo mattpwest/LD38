@@ -56,10 +56,10 @@ namespace Match3.Core.Tests.Domain {
             Assert.AreEqual(1, board.Matches.Count());
             var match = board.Matches.First();
             Assert.AreEqual(3, match.Length);
-            Assert.AreEqual(0, match.StartX);
-            Assert.AreEqual(0, match.StartY);
-            Assert.AreEqual(2, match.EndX);
-            Assert.AreEqual(0, match.EndY);
+            //Assert.AreEqual(0, match.StartX);
+            //Assert.AreEqual(0, match.StartY);
+            //Assert.AreEqual(2, match.EndX);
+            //Assert.AreEqual(0, match.EndY);
         }
 
         [Test]
@@ -78,10 +78,10 @@ namespace Match3.Core.Tests.Domain {
             Assert.AreEqual(1, board.Matches.Count());
             var match = board.Matches.First();
             Assert.AreEqual(3, match.Length);
-            Assert.AreEqual(0, match.StartX);
-            Assert.AreEqual(0, match.StartY);
-            Assert.AreEqual(0, match.EndX);
-            Assert.AreEqual(2, match.EndY);
+            //Assert.AreEqual(0, match.StartX);
+            //Assert.AreEqual(0, match.StartY);
+            //Assert.AreEqual(0, match.EndX);
+            //Assert.AreEqual(2, match.EndY);
         }
 
         [Test]
@@ -115,9 +115,9 @@ namespace Match3.Core.Tests.Domain {
             board.ClearMatches();
 
             // Then
-            for(var y = match.StartY; y < match.EndY; y++)
+            foreach(var matchedCell in match.MatchedCells)
             {
-                Assert.IsNull(board.GetTile(match.StartX, y)); 
+                Assert.True(matchedCell.IsEmpty);
             }
         }
 

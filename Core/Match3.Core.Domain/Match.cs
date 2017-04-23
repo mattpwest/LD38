@@ -1,32 +1,38 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace Match3.Core.Domain
 {
-    public struct Match
+    public abstract class Match
     {
-        public int StartX { get; }
-        public int StartY { get; }
-        public int EndX { get; }
-        public int EndY { get; }
-        public int Length { get; }
+        protected readonly IList<Cell> matchedCells;
+        protected readonly Cell seedCell;
+        public int Length => this.matchedCells.Count;
+        public IEnumerable<Cell> MatchedCells => this.matchedCells;
 
-        public Match(int startX, int startY, int endX, int endY)
+        private Match()
         {
-            if(startX != endX && startY != endY)
+            this.matchedCells = new List<Cell>();
+        }
+
+        protected Match(Cell seedCell)
+            : this()
+        {
+            this.seedCell = seedCell;
+            this.matchedCells.Add(this.seedCell);
+        }
+
+        public bool MatchTo(Cell cellToMach)
+        {
+            var match = this.CheckInMatch(cellToMach);
+
+            if(match)
             {
-                throw new ArgumentException("diagonal matches are not allowed");
+                this.matchedCells.Add(cellToMach);
             }
 
-            this.StartX = startX;
-            this.StartY = startY;
-            this.EndX = endX;
-            this.EndY = endY;
-            this.Length = Math.Abs(this.StartX - this.EndX) + Math.Abs(this.StartY - this.EndY) + 1;
+            return match;
         }
 
-        public bool CheckInMatch(int xInMatch, int yInMatch)
-        {
-            return xInMatch >= StartX && xInMatch <= EndX && yInMatch >= StartY && yInMatch <= EndY;
-        }
+        protected abstract bool CheckInMatch(Cell cellToMatch);
     }
 }

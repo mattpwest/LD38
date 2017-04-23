@@ -8,7 +8,12 @@ namespace Match3.Core.Domain
         {
             var board = new Board(width, height);
 
-            this.GenerateTiles(width, height, board.SetTile);
+            void SetTile(int x, int y, Tile tile)
+            {
+                board.GetCell(x, y).Tile = tile;
+            }
+
+            this.GenerateTiles(width, height, SetTile);
 
             return board;
         }

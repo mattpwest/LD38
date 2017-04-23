@@ -28,4 +28,9 @@ public class StubBoardPresenter : MonoBehaviour, IBoardPresenter {
     {
         throw new System.NotImplementedException();
     }
+
+    public void StoppedFalling(ITileView callingTileView)
+    {
+        throw new System.NotImplementedException();
+    }
 }
