@@ -1,22 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Game
+﻿public class Game
 {
+    private static Game instance;
     public int Level = 0;
     public int Seed { get; set; }
     public int Width { get; set; }
     public int Height { get; set; }
-
-    private static Game instance;
-
-    private Game()
-    {
-        Seed = 123;
-        Width = 3;
-        Height = 3;
-    }
+    public int ScoreGoal { get; set; }
+    public int MatchGoal { get; set; }
+    public int MovesGoal { get; set; }
 
     public static Game Instance
     {
@@ -29,5 +20,15 @@ public class Game
 
             return instance;
         }
+    }
+
+    private Game()
+    {
+        Seed = 123;
+        Width = 3;
+        Height = 3;
+        ScoreGoal = 0;
+        MatchGoal = 0;
+        this.MovesGoal = 10;
     }
 }

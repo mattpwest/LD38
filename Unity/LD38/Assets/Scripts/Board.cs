@@ -7,8 +7,6 @@ public class Board : MonoBehaviour
 {
     const float KEY_COOLDOWN = 1.0f;
 
-    public int width = 10;
-    public int height = 10;
     public Transform game;
     public bool debug = false;
 
@@ -18,7 +16,7 @@ public class Board : MonoBehaviour
     void Start ()
     {
         tileViewFactory = Instantiate(this.game).GetComponent<TileViewFactory>();
-        this.tileViewFactory.StartNewGame(Game.Instance.Width, Game.Instance.Height, Game.Instance.Seed);
+        this.tileViewFactory.StartNewGame(Game.Instance.Width, Game.Instance.Height, Game.Instance.Seed, Game.Instance.ScoreGoal, Game.Instance.MatchGoal, Game.Instance.MovesGoal);
     }
 	
 	void Update ()
@@ -36,7 +34,7 @@ public class Board : MonoBehaviour
 	        var seed = this.tileViewFactory.Seed;
             Destroy(this.tileViewFactory.gameObject);
 	        this.tileViewFactory = Instantiate(this.game).GetComponent<TileViewFactory>();
-            this.tileViewFactory.StartNewGame(this.width, this.height, seed);
+            this.tileViewFactory.StartNewGame(Game.Instance.Width, Game.Instance.Height, seed, Game.Instance.ScoreGoal, Game.Instance.MatchGoal, Game.Instance.MovesGoal);
             this.keyCooldown = 0.0f;
 	    }
         else if(Input.GetKeyDown(KeyCode.S))
@@ -44,7 +42,7 @@ public class Board : MonoBehaviour
 	        Debug.Log("Restarting with new seed...");
 	        Destroy(this.tileViewFactory.gameObject);
 	        this.tileViewFactory = Instantiate(this.game).GetComponent<TileViewFactory>();
-            this.tileViewFactory.StartNewGame(this.width, this.height);
+            this.tileViewFactory.StartNewGame(Game.Instance.Width, Game.Instance.Height, Game.Instance.ScoreGoal, Game.Instance.MatchGoal, Game.Instance.MovesGoal);
             this.keyCooldown = 0.0f;
 	    }
         else if(Input.GetKeyDown(KeyCode.B))

@@ -35,6 +35,9 @@ namespace Match3.Core.UI.Presenters
             IRandom random,
             int boardWidth,
             int boardHeight,
+            int scoreGoal,
+            int matchGoal,
+            int movesGoal,
             params string[] tileTypes)
             : this()
         {
@@ -73,7 +76,7 @@ namespace Match3.Core.UI.Presenters
             }
 
 
-            this.scoring = new Scoring(0, 0, 10);
+            this.scoring = new Scoring(scoreGoal, matchGoal, movesGoal);
             this.scoreView.SetMoves(this.scoring.MovesAllowed - this.scoring.MovesMade);
             this.scoreView.SetScore(this.scoring.CurrentScore);
             this.scoreView.SetMatches(this.scoring.CurrentMatches);
@@ -81,7 +84,7 @@ namespace Match3.Core.UI.Presenters
 
         public void Grabbed(ITileView tileView)
         {
-            if(!this.scoring.HasMovesLeft)
+            if(this.scoring.HasWon)
             {
                 return;
             }
@@ -103,7 +106,7 @@ namespace Match3.Core.UI.Presenters
 
         public void Moved(ITileView callingTileView, int x, int y)
         {
-            if (!this.scoring.HasMovesLeft)
+            if (this.scoring.HasWon)
             {
                 return;
             }
@@ -147,7 +150,7 @@ namespace Match3.Core.UI.Presenters
 
         public void Released(ITileView callingTileView)
         {
-            if (!this.scoring.HasMovesLeft)
+            if (this.scoring.HasWon)
             {
                 return;
             }
