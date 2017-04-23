@@ -45,6 +45,9 @@ public class LevelController : MonoBehaviour
         Game.Instance.Seed = CurrentConfig.seed;
         Game.Instance.Width = CurrentConfig.width;
         Game.Instance.Height = CurrentConfig.height;
+        Game.Instance.ScoreGoal = CurrentConfig.scoreGoal;
+        Game.Instance.MatchGoal = CurrentConfig.matchGoal;
+        Game.Instance.MovesGoal = CurrentConfig.moveGoal;
 
         SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }

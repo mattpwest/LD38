@@ -125,6 +125,9 @@ MonoBehaviour:
   seed: 1
   width: 5
   height: 10
+  scoreGoal: 0
+  matchGoal: 3
+  moveGoal: 3
   location: Johannesburg~South Africa
   description: The city is drowning in rubbish of all sorts, clean it up!
   goals: 3 matches~in 3 moves
@@ -147,8 +150,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 90.299965, y: -88.4}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchorMin: {x: 0.5762254, y: 0.374}
+  m_AnchorMax: {x: 0.5762254, y: 0.374}
+  m_AnchoredPosition: {x: -3.5, y: -1}
+  m_SizeDelta: {x: 33, y: 31}
   m_Pivot: {x: 0.5, y: 0.5}

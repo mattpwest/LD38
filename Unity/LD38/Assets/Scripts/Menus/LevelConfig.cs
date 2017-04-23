@@ -10,6 +10,9 @@ public class LevelConfig : MonoBehaviour
     public int seed;
     public int width;
     public int height;
+    public int scoreGoal;
+    public int matchGoal;
+    public int moveGoal;
     public string location;
     public string description;
     public string goals;

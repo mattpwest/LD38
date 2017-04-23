@@ -29,8 +29,11 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
     private int newWidth = -1;
     private int newHeight = -1;
     private int newSeed = -1;
+    private int newScoreGoal = -1;
+    private int newMatchGoal = -1;
+    private int newMovesGoal = -1;
 
-	void Start ()
+    void Start ()
 	{
 	    var bounds = Camera.main.OrthographicBounds();
 	    this.minX = -bounds.max.x;
@@ -47,21 +50,26 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
             var random = RNG.NewInstance(newSeed);
 	        Debug.Log(string.Format("Starting game with seed: {0}", newSeed));
 	        this.currentGame = new BoardPresenter(this.scoreView, ConsoleEndgame.NewInstance,
-                                                    this, random, this.newWidth, this.newHeight, this.TileViewNames);
+                                                    this, random, this.newWidth, this.newHeight,
+	                                                this.newScoreGoal, this.newMatchGoal,
+                                                    this.newMovesGoal, this.TileViewNames);
         }
 	}
 
-    public void StartNewGame(int width, int height)
+    public void StartNewGame(int width, int height, int scoreGoal, int matchGoal, int movesGoal)
     {
         var random = RNG.NewInstance();
-        StartNewGame(width, height, random.Seed);
+        this.StartNewGame(width, height, random.Seed, scoreGoal, matchGoal, movesGoal);
     }
 
-    public void StartNewGame(int width, int height, int seed)
+    public void StartNewGame(int width, int height, int seed, int scoreGoal, int matchGoal, int movesGoal)
     {
         this.newWidth = width;
         this.newHeight = height;
         this.newSeed = seed;
+        this.newScoreGoal = scoreGoal;
+        this.newMatchGoal = matchGoal;
+        this.newMovesGoal = movesGoal;
         this.currentGame = null;
     }
 
