@@ -302,15 +302,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileViews:
-  - {fileID: 4453634787767514, guid: 212ae0c565a8f1d4f9e844129f7a368d, type: 2}
-  - {fileID: 4834693928137492, guid: aaa342828c643324d8239956084070bb, type: 2}
-  - {fileID: 4668006439425306, guid: c280abe8da084c24ab5dfffd211128dc, type: 2}
-  - {fileID: 4829800456629522, guid: c1b6f07b38e003446bdac74e58542607, type: 2}
+  - {fileID: 4362427231993448, guid: 7eb0cc898569cee44bd1bfd819f6ee39, type: 2}
+  - {fileID: 4041543691660710, guid: accddd40b9c365a41b77311c6929e5c5, type: 2}
+  - {fileID: 4456919913980208, guid: d08f3742c5035d24e8ad10a2e45f05b5, type: 2}
+  - {fileID: 4352251224875194, guid: 0ecd784ac54250a4186fa5646ba56cd3, type: 2}
+  - {fileID: 4288519896520328, guid: e5da4ae5473d7bc45816e6768015f205, type: 2}
   TileViewNames:
-  - Ruby
-  - Emerald
-  - Sapphire
-  - Diamond
+  - RedCan
+  - GreenBottle
+  - BlueCan
+  - WhitePaper
+  - YellowCake
 --- !u!4 &1760733198
 Transform:
   m_ObjectHideFlags: 0
