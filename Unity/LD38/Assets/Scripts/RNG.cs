@@ -33,6 +33,7 @@ internal class RNG : IRandom
         :this()
     {
         this.seed = seed;
+        Random.InitState(this.seed);
     }
 
     public int GetRandomNumber(int inclusiveFrom, int exclusiveTo)

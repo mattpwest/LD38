@@ -10,11 +10,24 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 
     public Transform[] TileViews;
     public string[] TileViewNames;
-    public int BoardWidth = 5;
-    public int BoardHeight = 5;
+
+    public int Seed
+    {
+        get
+        {
+            return this.newSeed;
+        }
+    }
 
     private float minX;
     private float maxY;
+
+    private Transform tiles;
+
+    private BoardPresenter currentGame;
+    private int newWidth = -1;
+    private int newHeight = -1;
+    private int newSeed = -1;
 
 	void Start ()
 	{
@@ -22,23 +35,36 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 	    this.minX = -bounds.max.x;
 	    this.maxY = bounds.max.y;
 
-        //Debug.Log("MinX: " + minX);
-	    //Debug.Log("MinY: " + minY);
-	    //Debug.Log("MaxX: " + maxX);
-	    //Debug.Log("MaxY: " + maxY);
-
-	    var random = RNG.NewInstance();
-        Debug.Log(string.Format("Random Seed: {0}", random.Seed));
-	    new BoardPresenter(ConsoleScore.NewInstance, this, random, this.BoardWidth, this.BoardHeight, this.TileViewNames);
-    }
+	    this.tiles = gameObject.transform.Find("Tiles");
+	}
 	
 	void Update ()
 	{
+	    if(this.newWidth > 0 && this.currentGame == null)
+	    {
+	        var random = RNG.NewInstance(newSeed);
+	        Debug.Log(string.Format("Starting game with seed: {0}", newSeed));
+	        this.currentGame = new BoardPresenter(ConsoleScore.NewInstance, this, random, this.newWidth, this.newHeight, this.TileViewNames);
+        }
 	}
+
+    public void StartNewGame(int width, int height)
+    {
+        var random = RNG.NewInstance();
+        StartNewGame(width, height, random.Seed);
+    }
+
+    public void StartNewGame(int width, int height, int seed)
+    {
+        this.newWidth = width;
+        this.newHeight = height;
+        this.newSeed = seed;
+        this.currentGame = null;
+    }
 
     public ITileView CreateInitial(IBoardPresenter presenter, string type, int x, int y)
     {
-        var startX = this.minX + 0.5f + x * 1.0f;
+        var startX = -this.newWidth * 0.5f + x * 1.0f;
         var startY = this.maxY + 1.5f + y * 1.0f;
 
         return CreateAtLocation(presenter, type, x, y, startX, startY);
@@ -46,7 +72,7 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 
     public ITileView Create(IBoardPresenter presenter, string type, int x, int y)
     {
-        var startX = this.minX + 0.5f + x * 1.0f;
+        var startX = -this.newWidth * 0.5f + x * 1.0f;
         var startY = this.maxY + 1.5f;
 
         return CreateAtLocation(presenter, type, x, y, startX, startY);
@@ -60,7 +86,7 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
             throw new IndexOutOfRangeException("no TileView found for type " + type);
         }
 
-        var viewTransform = Instantiate(this.TileViews[index], new Vector3(startX, startY, 0.0f), Quaternion.identity);
+        var viewTransform = Instantiate(this.TileViews[index], new Vector3(startX, startY, 0.0f), Quaternion.identity, this.tiles);
         var tileView = viewTransform.GetComponent<TileView>();
         tileView.Presenter = presenter;
 

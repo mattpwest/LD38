@@ -199,12 +199,13 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">Sprites/Diamond.png</key>
-            <key type="filename">Sprites/Emerald.png</key>
-            <key type="filename">Sprites/GreenPin.png</key>
-            <key type="filename">Sprites/RedPin.png</key>
-            <key type="filename">Sprites/Ruby.png</key>
-            <key type="filename">Sprites/Sapphire.png</key>
+            <key type="filename">Sprites/Blood Recticle.png</key>
+            <key type="filename">Sprites/BlueCan.png</key>
+            <key type="filename">Sprites/GreenBottle.png</key>
+            <key type="filename">Sprites/RedCan.png</key>
+            <key type="filename">Sprites/WhitePaper.png</key>
+            <key type="filename">Sprites/WoodPanel.png</key>
+            <key type="filename">Sprites/YellowCake.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -214,6 +215,19 @@
                 <rect>8,8,16,16</rect>
                 <key>scale9Paddings</key>
                 <rect>8,8,16,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Sprites/LiveTree.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>12,12,24,24</rect>
+                <key>scale9Paddings</key>
+                <rect>12,12,24,24</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

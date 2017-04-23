@@ -17,6 +17,7 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
     private Vector2 targetPosition;
     private float minX;
     private float minY;
+    private float baseX; // Starting X position as calculated by the tile factory
 
     private Vector2 dragStart;
     private bool falling;
@@ -26,11 +27,12 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
         var bounds = Camera.main.OrthographicBounds();
         this.minX = -bounds.max.x;
         this.minY = -bounds.max.y;
+        this.baseX = transform.position.x - X * 1.0f;
     }
 
     void Update()
     {
-        this.targetPosition = new Vector2(this.minX + 0.5f + X * 1.0f, this.minY + 0.5f + Y * 1.0f);
+        this.targetPosition = new Vector2(this.baseX + X * 1.0f, this.minY + 0.5f + Y * 1.0f);
 
         Vector2 currentPosition = this.transform.position;
 
@@ -62,6 +64,7 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
     {
         this.X = x;
         this.Y = y;
+        this.baseX = this.baseX - (this.OriginalX - this.X);
     }
 
     public void Destroy(int tileMatchValue)
