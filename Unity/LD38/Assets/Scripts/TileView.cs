@@ -8,6 +8,7 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
 {
     const int TILE_SIZE = 32;
 
+    public Transform destroyParticles;
     public int X { get; set; }
     public int Y { get; set; }
     public int OriginalY { get; private set; }
@@ -68,8 +69,12 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
 
     public void Destroy(int tileMatchValue)
     {
+        if(this.destroyParticles != null)
+        {
+            Instantiate(this.destroyParticles, gameObject.transform.position, Quaternion.identity);
+        }
+
         Destroy(gameObject);
-        // TODO: Add destroy FX
     }
 
     public void OnDrag(PointerEventData eventData)
