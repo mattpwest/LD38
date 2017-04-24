@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114707493207809316}
   - component: {fileID: 114804695849235736}
   - component: {fileID: 114997729901576066}
+  - component: {fileID: 114011511039683178}
   m_Layer: 5
   m_Name: CapeTown
   m_TagString: Untagged
@@ -31,6 +32,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114011511039683178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1744419412512268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61cd2e561e2f4054fb67febcdbb01b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinSize: 0.8
+  MaxSize: 1.2
+  Duration: 1
 --- !u!114 &114349446182300746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -72,15 +87,15 @@ MonoBehaviour:
   done: {fileID: 21300014, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
   next: {fileID: 21300016, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
   seed: 2
-  width: 10
-  height: 10
+  width: 6
+  height: 6
   scoreGoal: 0
-  matchGoal: 10
-  moveGoal: 8
+  matchGoal: 15
+  moveGoal: 10
   location: Cape Town~South Africa
   description: In addition to the regular trash you must also deal with nuclear waste     from
     Koeberg!
-  goals: 10 matches~in 8 moves
+  goals: 15 matches~in 10 moves
 --- !u!114 &114804695849235736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,8 +181,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.54079556, y: 0.31800002}
-  m_AnchorMax: {x: 0.54079556, y: 0.31800002}
-  m_AnchoredPosition: {x: 0.099998474, y: -0.5999985}
-  m_SizeDelta: {x: 31, y: 32}
+  m_AnchorMin: {x: 0.5525, y: 0.31100002}
+  m_AnchorMax: {x: 0.5525, y: 0.31100002}
+  m_AnchoredPosition: {x: 0.23001099, y: 0.13999939}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}

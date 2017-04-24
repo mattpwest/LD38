@@ -9,36 +9,60 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1610639877233502}
+  m_RootGameObject: {fileID: 1580209711816682}
   m_IsPrefabParent: 1
---- !u!1 &1610639877233502
+--- !u!1 &1580209711816682
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224610834469067438}
-  - component: {fileID: 222590394157310494}
-  - component: {fileID: 114192840002597638}
-  - component: {fileID: 114705881394903794}
-  - component: {fileID: 114776837133250652}
-  - component: {fileID: 114111867946831674}
-  - component: {fileID: 114235385871151686}
-  - component: {fileID: 114384978108323876}
+  - component: {fileID: 224551841787411528}
+  - component: {fileID: 222120912046472658}
+  - component: {fileID: 114518515081574758}
+  - component: {fileID: 114782651693690542}
+  - component: {fileID: 114028489971778478}
+  - component: {fileID: 114604875035234736}
+  - component: {fileID: 114581501791882996}
+  - component: {fileID: 114307358663589992}
+  - component: {fileID: 114631188609114708}
   m_Layer: 5
-  m_Name: Johannesburg
+  m_Name: London
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114111867946831674
+--- !u!114 &114028489971778478
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1610639877233502}
+  m_GameObject: {fileID: 1580209711816682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2282e54994305194badccba6689b89e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  done: {fileID: 21300014, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
+  next: {fileID: 21300016, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
+  seed: 5
+  width: 6
+  height: 8
+  scoreGoal: 10000
+  matchGoal: 0
+  moveGoal: 25
+  location: London~Great Britain
+  description: A sudden wave of littering has hit the city hard! Help recycle all
+    that trash...
+  goals: 10000 score~in 25 moves
+--- !u!114 &114307358663589992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1580209711816682}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61cd2e561e2f4054fb67febcdbb01b8e, type: 3}
@@ -47,12 +71,12 @@ MonoBehaviour:
   MinSize: 0.8
   MaxSize: 1.2
   Duration: 1
---- !u!114 &114192840002597638
+--- !u!114 &114518515081574758
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1610639877233502}
+  m_GameObject: {fileID: 1580209711816682}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -74,12 +98,12 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114235385871151686
+--- !u!114 &114581501791882996
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1610639877233502}
+  m_GameObject: {fileID: 1580209711816682}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61cd2e561e2f4054fb67febcdbb01b8e, type: 3}
@@ -88,12 +112,12 @@ MonoBehaviour:
   MinSize: 0.8
   MaxSize: 1.2
   Duration: 1
---- !u!114 &114384978108323876
+--- !u!114 &114604875035234736
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1610639877233502}
+  m_GameObject: {fileID: 1580209711816682}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61cd2e561e2f4054fb67febcdbb01b8e, type: 3}
@@ -102,12 +126,26 @@ MonoBehaviour:
   MinSize: 0.8
   MaxSize: 1.2
   Duration: 1
---- !u!114 &114705881394903794
+--- !u!114 &114631188609114708
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1610639877233502}
+  m_GameObject: {fileID: 1580209711816682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61cd2e561e2f4054fb67febcdbb01b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinSize: 0.8
+  MaxSize: 1.2
+  Duration: 1
+--- !u!114 &114782651693690542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1580209711816682}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -137,11 +175,11 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 114192840002597638}
+  m_TargetGraphic: {fileID: 114518515081574758}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114776837133250652}
+      - m_Target: {fileID: 114028489971778478}
         m_MethodName: OnLevelItemClicked
         m_Mode: 1
         m_Arguments:
@@ -154,40 +192,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114776837133250652
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1610639877233502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2282e54994305194badccba6689b89e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  done: {fileID: 21300014, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
-  next: {fileID: 21300016, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
-  seed: 1
-  width: 5
-  height: 10
-  scoreGoal: 0
-  matchGoal: 3
-  moveGoal: 3
-  location: Johannesburg~South Africa
-  description: The city is drowning in rubbish of all sorts, clean it up!
-  goals: 3 matches~in 3 moves
---- !u!222 &222590394157310494
+--- !u!222 &222120912046472658
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1610639877233502}
---- !u!224 &224610834469067438
+  m_GameObject: {fileID: 1580209711816682}
+--- !u!224 &224551841787411528
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1610639877233502}
+  m_GameObject: {fileID: 1580209711816682}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -195,8 +211,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.57416743, y: 0.353847}
-  m_AnchorMax: {x: 0.57416743, y: 0.353847}
-  m_AnchoredPosition: {x: 0, y: 0.1000061}
+  m_AnchorMin: {x: 0.49915397, y: 0.791}
+  m_AnchorMax: {x: 0.49915397, y: 0.791}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
