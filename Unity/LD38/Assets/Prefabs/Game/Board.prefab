@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 4519577798166804, guid: 577a0466bb9c6cb41bfee698f9cb2664, type: 2}
-  debug: 1
+  debug: 0
 --- !u!114 &114645967810392372
 MonoBehaviour:
   m_ObjectHideFlags: 1
