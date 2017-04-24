@@ -24,6 +24,7 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 
     private Transform tiles;
     private ScoreView scoreView;
+    private EndGameView endGameView;
 
     private BoardPresenter currentGame;
     private int newWidth = -1;
@@ -47,9 +48,10 @@ public class TileViewFactory : MonoBehaviour, ITileViewFactory
 	    if(this.newWidth > 0 && this.currentGame == null)
 	    {
 	        this.scoreView = GameObject.FindWithTag("ScoreView").GetComponent<ScoreView>();
+	        this.endGameView = GameObject.FindWithTag("EndGameView").GetComponent<EndGameView>();
             var random = RNG.NewInstance(newSeed);
 	        Debug.Log(string.Format("Starting game with seed: {0}", newSeed));
-	        this.currentGame = new BoardPresenter(this.scoreView, ConsoleEndgame.NewInstance,
+	        this.currentGame = new BoardPresenter(this.scoreView, this.endGameView,
                                                     this, random, this.newWidth, this.newHeight,
 	                                                this.newScoreGoal, this.newMatchGoal,
                                                     this.newMovesGoal, this.TileViewNames);

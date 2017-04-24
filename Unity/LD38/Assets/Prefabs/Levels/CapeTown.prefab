@@ -9,33 +9,83 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1206829157628866}
+  m_RootGameObject: {fileID: 1744419412512268}
   m_IsPrefabParent: 1
---- !u!1 &1206829157628866
+--- !u!1 &1744419412512268
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224776852978041172}
-  - component: {fileID: 222469499444965944}
-  - component: {fileID: 114340886237657162}
-  - component: {fileID: 114157086396309664}
-  - component: {fileID: 114776649499787892}
+  - component: {fileID: 224272970171249326}
+  - component: {fileID: 222966525513091642}
+  - component: {fileID: 114349446182300746}
+  - component: {fileID: 114707493207809316}
+  - component: {fileID: 114804695849235736}
   m_Layer: 5
-  m_Name: Johannesburg
+  m_Name: CapeTown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114157086396309664
+--- !u!114 &114349446182300746
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1206829157628866}
+  m_GameObject: {fileID: 1744419412512268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300016, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!114 &114707493207809316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1744419412512268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2282e54994305194badccba6689b89e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  done: {fileID: 21300014, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
+  next: {fileID: 21300016, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
+  seed: 2
+  width: 10
+  height: 10
+  scoreGoal: 0
+  matchGoal: 10
+  moveGoal: 8
+  location: Cape Town~South Africa
+  description: In addition to the regular trash you must also deal with nuclear waste     from
+    Koeberg!
+  goals: 10 matches~in 8 moves
+--- !u!114 &114804695849235736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1744419412512268}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -65,11 +115,11 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 114340886237657162}
+  m_TargetGraphic: {fileID: 114349446182300746}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114776649499787892}
+      - m_Target: {fileID: 114707493207809316}
         m_MethodName: OnLevelItemClicked
         m_Mode: 1
         m_Arguments:
@@ -82,67 +132,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114340886237657162
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1206829157628866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300016, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!114 &114776649499787892
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1206829157628866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3edc83f070b8ea4299f51727bb940a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  done: {fileID: 21300014, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
-  next: {fileID: 21300016, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
-  seed: 1
-  width: 5
-  height: 10
-  scoreGoal: 0
-  matchGoal: 3
-  moveGoal: 3
-  location: Johannesburg~South Africa
-  description: The city is drowning in rubbish of all sorts, clean it up!
-  goals: 3 matches~in 3 moves
---- !u!222 &222469499444965944
+--- !u!222 &222966525513091642
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1206829157628866}
---- !u!224 &224776852978041172
+  m_GameObject: {fileID: 1744419412512268}
+--- !u!224 &224272970171249326
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1206829157628866}
+  m_GameObject: {fileID: 1744419412512268}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -150,8 +151,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5762254, y: 0.374}
-  m_AnchorMax: {x: 0.5762254, y: 0.374}
-  m_AnchoredPosition: {x: -3.5, y: -1}
-  m_SizeDelta: {x: 33, y: 31}
+  m_AnchorMin: {x: 0.5723239, y: 0.374}
+  m_AnchorMax: {x: 0.5723239, y: 0.374}
+  m_AnchoredPosition: {x: -28.199997, y: -22.900002}
+  m_SizeDelta: {x: 31, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}

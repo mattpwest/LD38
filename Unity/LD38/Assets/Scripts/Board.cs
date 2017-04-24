@@ -12,16 +12,24 @@ public class Board : MonoBehaviour
 
     private TileViewFactory tileViewFactory;
     private float keyCooldown = 1.0f;
+    private LevelConfig config;
 
     void Start ()
     {
-        tileViewFactory = Instantiate(this.game).GetComponent<TileViewFactory>();
-        this.tileViewFactory.StartNewGame(Game.Instance.Width, Game.Instance.Height, Game.Instance.Seed, Game.Instance.ScoreGoal, Game.Instance.MatchGoal, Game.Instance.MovesGoal);
+        Game gameInstance = Game.Instance;
+        Game.GameEvent lastEvent = gameInstance.LastEvent;
+
+        if(typeof(Game.GameStartedEvent) == lastEvent.GetType())
+        {
+            config = ((Game.GameStartedEvent)lastEvent).LevelConfig;
+            tileViewFactory = Instantiate(this.game).GetComponent<TileViewFactory>();
+            this.tileViewFactory.StartNewGame(config.Width, config.Height, config.Seed, config.ScoreGoal, config.MatchGoal, config.MoveGoal);
+        }
     }
 	
 	void Update ()
 	{
-	    if(!this.debug)
+	    if(!this.debug || this.config == null)
 	    {
 	        return;
 	    }
@@ -34,7 +42,7 @@ public class Board : MonoBehaviour
 	        var seed = this.tileViewFactory.Seed;
             Destroy(this.tileViewFactory.gameObject);
 	        this.tileViewFactory = Instantiate(this.game).GetComponent<TileViewFactory>();
-            this.tileViewFactory.StartNewGame(Game.Instance.Width, Game.Instance.Height, seed, Game.Instance.ScoreGoal, Game.Instance.MatchGoal, Game.Instance.MovesGoal);
+            this.tileViewFactory.StartNewGame(config.Width, config.Height, seed, config.ScoreGoal, config.MatchGoal, config.MoveGoal);
             this.keyCooldown = 0.0f;
 	    }
         else if(Input.GetKeyDown(KeyCode.S))
@@ -42,7 +50,7 @@ public class Board : MonoBehaviour
 	        Debug.Log("Restarting with new seed...");
 	        Destroy(this.tileViewFactory.gameObject);
 	        this.tileViewFactory = Instantiate(this.game).GetComponent<TileViewFactory>();
-            this.tileViewFactory.StartNewGame(Game.Instance.Width, Game.Instance.Height, Game.Instance.ScoreGoal, Game.Instance.MatchGoal, Game.Instance.MovesGoal);
+            this.tileViewFactory.StartNewGame(config.Width, config.Height, config.ScoreGoal, config.MatchGoal, config.MoveGoal);
             this.keyCooldown = 0.0f;
 	    }
         else if(Input.GetKeyDown(KeyCode.B))
@@ -53,7 +61,7 @@ public class Board : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.N))
 	    {
 	        Debug.Log("Going back to menu screen for next level...");
-	        Game.Instance.Level++;
+	        Game.Instance.AddEvent(new Game.GameWonEvent(this.config, 0));
             SceneManager.LoadScene("Menu_Levels", LoadSceneMode.Single);
 	    }
 	}
