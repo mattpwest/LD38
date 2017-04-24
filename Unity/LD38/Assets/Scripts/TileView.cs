@@ -19,6 +19,7 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
     private float minX;
     private float minY;
     private float baseX; // Starting X position as calculated by the tile factory
+    private float tweenValue = 0.1f;
 
     private Vector2 dragStart;
     private bool falling;
@@ -41,7 +42,7 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
         if(!(Math.Abs(distanceFromTarge.sqrMagnitude) < 0.0005f))
         {
 
-            this.transform.position = currentPosition + (this.targetPosition - currentPosition) * 0.1f;
+            this.transform.position = currentPosition + (this.targetPosition - currentPosition) * this.tweenValue;
             return;
         }
 
@@ -59,6 +60,7 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
         this.X = x;
         this.Y = y;
         this.falling = true;
+        this.tweenValue = this.tweenValue * UnityEngine.Random.Range(0.8f, 1.2f);
     }
 
     public void Move(int x, int y)
