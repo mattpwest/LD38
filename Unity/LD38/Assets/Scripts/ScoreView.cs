@@ -16,6 +16,7 @@ public class ScoreView : MonoBehaviour, IScoreView
     private Text scoreText;
     private Text movesText;
     private Text matchesText;
+    private Text goalsText;
     private int scoreDiff;
 
     void Start ()
@@ -24,7 +25,12 @@ public class ScoreView : MonoBehaviour, IScoreView
 	    this.scoreText = scoresPanel.Find("ScoreText").GetComponent<Text>();
         this.movesText = scoresPanel.Find("MovesText").GetComponent<Text>();
         this.matchesText = scoresPanel.Find("MatchesText").GetComponent<Text>();
-    }
+	    this.goalsText = gameObject.transform
+	        .Find("GoalsPanel")
+	        .Find("GoalsText")
+	        .GetComponent<Text>();
+
+	}
 	
 	void Update () {
         var scoreDiff = this.scoreTo - this.score;
@@ -35,7 +41,14 @@ public class ScoreView : MonoBehaviour, IScoreView
         this.scoreText.text = "" + Mathf.RoundToInt(this.score);
 	    this.movesText.text = "" + Mathf.RoundToInt(this.moves);
 	    this.matchesText.text = "" + Mathf.RoundToInt(this.matches);
-	}
+
+	    // TODO: This is a bit nasty, but in a hurry for deadline...
+
+	    if(this.goalsText.text.Equals("Moves"))
+	    {
+	        this.goalsText.text = Game.Instance.CurrentLevelConfig.Goals.Replace('~', '\n');
+	    }
+    }
 
     public void UpdateScore(int scoreDiff, int score)
     {

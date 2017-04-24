@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114086203079091780}
   - component: {fileID: 114453353376754502}
   - component: {fileID: 114197381573780384}
+  - component: {fileID: 114073200637145756}
   m_Layer: 5
   m_Name: New Delhi
   m_TagString: Untagged
@@ -30,6 +31,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114073200637145756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1634049993034478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61cd2e561e2f4054fb67febcdbb01b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinSize: 0.8
+  MaxSize: 1.2
+  Duration: 1
 --- !u!114 &114086203079091780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -77,7 +92,7 @@ MonoBehaviour:
   matchGoal: 45
   moveGoal: 30
   location: New Delhi~India
-  description: TODO
+  description: This city is in serious need of clean-up - get to it!
   goals: 15000 score~45 matches~in 30 moves
 --- !u!114 &114453353376754502
 MonoBehaviour:

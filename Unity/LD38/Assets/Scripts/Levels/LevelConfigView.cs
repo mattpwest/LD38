@@ -70,8 +70,11 @@ public class LevelConfigView : MonoBehaviour
         {
             ((SizePulseTween) allOtherTweens[i]).Disable();
         }
-        
-        this.GetComponent<SizePulseTween>().Enable();
+
+        if(this.GetComponent<SizePulseTween>() != null)
+        {
+            this.GetComponent<SizePulseTween>().Enable();
+        }
     }
 
     public void Hide()

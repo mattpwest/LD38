@@ -40,6 +40,11 @@ public class Game
     public void AddEvent(GameEvent gameEvent)
     {
         events.Add(gameEvent);
+
+        if(typeof(GameStartedEvent) == gameEvent.GetType())
+        {
+            this.CurrentLevelConfig = gameEvent.LevelConfig;
+        }
     }
 
     public class GameEvent
