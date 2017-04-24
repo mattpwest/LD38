@@ -9,49 +9,33 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1744419412512268}
+  m_RootGameObject: {fileID: 1634049993034478}
   m_IsPrefabParent: 1
---- !u!1 &1744419412512268
+--- !u!1 &1634049993034478
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224272970171249326}
-  - component: {fileID: 222966525513091642}
-  - component: {fileID: 114349446182300746}
-  - component: {fileID: 114707493207809316}
-  - component: {fileID: 114804695849235736}
-  - component: {fileID: 114997729901576066}
-  - component: {fileID: 114011511039683178}
+  - component: {fileID: 224122034843529508}
+  - component: {fileID: 222641555637184878}
+  - component: {fileID: 114086203079091780}
+  - component: {fileID: 114453353376754502}
+  - component: {fileID: 114197381573780384}
   m_Layer: 5
-  m_Name: CapeTown
+  m_Name: New Delhi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114011511039683178
+--- !u!114 &114086203079091780
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744419412512268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61cd2e561e2f4054fb67febcdbb01b8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MinSize: 0.8
-  MaxSize: 1.2
-  Duration: 1
---- !u!114 &114349446182300746
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744419412512268}
+  m_GameObject: {fileID: 1634049993034478}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -73,12 +57,12 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114707493207809316
+--- !u!114 &114197381573780384
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744419412512268}
+  m_GameObject: {fileID: 1634049993034478}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2282e54994305194badccba6689b89e6, type: 3}
@@ -86,21 +70,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   done: {fileID: 21300014, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
   next: {fileID: 21300016, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
-  seed: 2
-  width: 6
-  height: 6
-  scoreGoal: 0
-  matchGoal: 15
-  moveGoal: 10
-  location: Cape Town~South Africa
-  description: The city doesn't have a lot of money so you have to clean up economically.
-  goals: 15 matches~in 10 moves
---- !u!114 &114804695849235736
+  seed: 8
+  width: 8
+  height: 8
+  scoreGoal: 15000
+  matchGoal: 45
+  moveGoal: 30
+  location: New Delhi~India
+  description: TODO
+  goals: 15000 score~45 matches~in 30 moves
+--- !u!114 &114453353376754502
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744419412512268}
+  m_GameObject: {fileID: 1634049993034478}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -130,11 +114,11 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 114349446182300746}
+  m_TargetGraphic: {fileID: 114086203079091780}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114707493207809316}
+      - m_Target: {fileID: 114197381573780384}
         m_MethodName: OnLevelItemClicked
         m_Mode: 1
         m_Arguments:
@@ -147,32 +131,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114997729901576066
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744419412512268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61cd2e561e2f4054fb67febcdbb01b8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MinSize: 0.8
-  MaxSize: 1.2
-  Duration: 1
---- !u!222 &222966525513091642
+--- !u!222 &222641555637184878
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744419412512268}
---- !u!224 &224272970171249326
+  m_GameObject: {fileID: 1634049993034478}
+--- !u!224 &224122034843529508
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744419412512268}
+  m_GameObject: {fileID: 1634049993034478}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -180,8 +150,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5525, y: 0.31100002}
-  m_AnchorMax: {x: 0.5525, y: 0.31100002}
-  m_AnchoredPosition: {x: 0.23001099, y: 0.13999939}
+  m_AnchorMin: {x: 0.703, y: 0.623}
+  m_AnchorMax: {x: 0.703, y: 0.623}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
