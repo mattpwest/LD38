@@ -18,6 +18,8 @@ TextureImporter:
     21300022: GreenBottle
     21300024: WhitePaper
     21300026: YellowCake
+    21300028: BlueCan Lighter
+    21300030: YellowPlasticCan
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -97,7 +99,7 @@ TextureImporter:
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: BlueCan
+      name: BlueCan Lighter
       rect:
         serializedVersion: 2
         x: 35
@@ -110,10 +112,23 @@ TextureImporter:
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: BlueCan
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 13
+        width: 31
+        height: 31
+      alignment: 9
+      pivot: {x: 0.48387095, y: 0.48387095}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: GreenBottle
       rect:
         serializedVersion: 2
-        x: 50
+        x: 113
         y: 96
         width: 11
         height: 31
@@ -139,8 +154,8 @@ TextureImporter:
       name: RedCan
       rect:
         serializedVersion: 2
-        x: 35
-        y: 13
+        x: 50
+        y: 96
         width: 31
         height: 31
       alignment: 9
@@ -152,8 +167,8 @@ TextureImporter:
       name: WhitePaper
       rect:
         serializedVersion: 2
-        x: 93
-        y: 100
+        x: 83
+        y: 70
         width: 27
         height: 27
       alignment: 9
@@ -178,9 +193,22 @@ TextureImporter:
       name: YellowCake
       rect:
         serializedVersion: 2
-        x: 63
+        x: 83
         y: 99
         width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: YellowPlasticCan
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 40
+        width: 22
         height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
