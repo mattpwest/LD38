@@ -64,6 +64,14 @@ public class LevelConfigView : MonoBehaviour
     public void OnLevelItemClicked()
     {
         this.mustUpdateUI = true;
+
+        var allOtherTweens = GameObject.FindObjectsOfType(typeof(SizePulseTween));
+        for(int i = 0; i < allOtherTweens.Length; i++)
+        {
+            ((SizePulseTween) allOtherTweens[i]).Disable();
+        }
+        
+        this.GetComponent<SizePulseTween>().Enable();
     }
 
     public void Hide()

@@ -320,6 +320,25 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 108805218}
+--- !u!1 &356112592 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1610639877233502, guid: 2a1b7d52924a68e40846771b805a393a,
+    type: 2}
+  m_PrefabInternal: {fileID: 947122584}
+--- !u!114 &356112593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 356112592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61cd2e561e2f4054fb67febcdbb01b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinSize: 0.8
+  MaxSize: 1.2
+  Duration: 1
 --- !u!1 &405257491
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,6 +1256,25 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1027721073}
+--- !u!1 &1047734310 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1744419412512268, guid: c61c1e1752482f344ac1ee425d8e43f9,
+    type: 2}
+  m_PrefabInternal: {fileID: 883832065}
+--- !u!114 &1047734311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1047734310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61cd2e561e2f4054fb67febcdbb01b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinSize: 0.8
+  MaxSize: 1.2
+  Duration: 1
 --- !u!1 &1081019307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,6 +1655,25 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224610834469067438, guid: 2a1b7d52924a68e40846771b805a393a,
     type: 2}
   m_PrefabInternal: {fileID: 1419142022}
+--- !u!1 &1419142024 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1610639877233502, guid: 2a1b7d52924a68e40846771b805a393a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1419142022}
+--- !u!114 &1419142025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1419142024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61cd2e561e2f4054fb67febcdbb01b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinSize: 0.8
+  MaxSize: 1.2
+  Duration: 1
 --- !u!1 &1437164457
 GameObject:
   m_ObjectHideFlags: 0

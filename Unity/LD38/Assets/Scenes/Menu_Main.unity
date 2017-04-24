@@ -582,6 +582,7 @@ GameObject:
   - component: {fileID: 1580882104}
   - component: {fileID: 1580882103}
   - component: {fileID: 1580882102}
+  - component: {fileID: 1580882105}
   m_Layer: 5
   m_Name: TitleStartButton
   m_TagString: Untagged
@@ -698,6 +699,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1580882100}
+--- !u!114 &1580882105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1580882100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61cd2e561e2f4054fb67febcdbb01b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinSize: 0.8
+  MaxSize: 1.2
+  Duration: 1
 --- !u!1 &1697845771
 GameObject:
   m_ObjectHideFlags: 0
