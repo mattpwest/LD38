@@ -122,15 +122,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   done: {fileID: 21300014, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
   next: {fileID: 21300016, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
-  seed: 1
-  width: 5
-  height: 10
-  scoreGoal: 0
-  matchGoal: 3
-  moveGoal: 3
-  location: Johannesburg~South Africa
-  description: The city is drowning in rubbish of all sorts, clean it up!
-  goals: 3 matches~in 3 moves
+  seed: 5
+  width: 6
+  height: 8
+  scoreGoal: 10000
+  matchGoal: 0
+  moveGoal: 25
+  location: London~Great Brittain
+  description: TODO
+  goals: 10000 score~in 30 moves
 --- !u!222 &222590394157310494
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -150,8 +150,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5762254, y: 0.374}
-  m_AnchorMax: {x: 0.5762254, y: 0.374}
-  m_AnchoredPosition: {x: -3.5, y: -1}
-  m_SizeDelta: {x: 33, y: 31}
+  m_AnchorMin: {x: 0.49915397, y: 0.791}
+  m_AnchorMax: {x: 0.49915397, y: 0.791}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}

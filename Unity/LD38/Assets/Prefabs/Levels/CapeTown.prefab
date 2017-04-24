@@ -71,11 +71,11 @@ MonoBehaviour:
   done: {fileID: 21300014, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
   next: {fileID: 21300016, guid: a106e13747c4f9f46bd84546b7675b8a, type: 3}
   seed: 2
-  width: 10
-  height: 10
+  width: 6
+  height: 6
   scoreGoal: 0
-  matchGoal: 10
-  moveGoal: 8
+  matchGoal: 15
+  moveGoal: 10
   location: Cape Town~South Africa
   description: In addition to the regular trash you must also deal with nuclear waste     from
     Koeberg!
@@ -151,8 +151,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5723239, y: 0.374}
-  m_AnchorMax: {x: 0.5723239, y: 0.374}
-  m_AnchoredPosition: {x: -28.199997, y: -22.900002}
-  m_SizeDelta: {x: 31, y: 32}
+  m_AnchorMin: {x: 0.5525, y: 0.31100002}
+  m_AnchorMax: {x: 0.5525, y: 0.31100002}
+  m_AnchoredPosition: {x: 0.23001099, y: 0.13999939}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
