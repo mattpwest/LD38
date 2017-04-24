@@ -52,8 +52,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0414949a04f46042b2ffbd5ce2f7d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 10
-  height: 10
   game: {fileID: 4519577798166804, guid: 577a0466bb9c6cb41bfee698f9cb2664, type: 2}
   debug: 1
 --- !u!114 &114645967810392372

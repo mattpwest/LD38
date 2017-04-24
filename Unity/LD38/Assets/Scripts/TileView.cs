@@ -24,12 +24,16 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
     private Vector2 dragStart;
     private bool falling;
 
+    private AudioSource audioSource;
+
     void Start()
     {
         var bounds = Camera.main.OrthographicBounds();
         this.minX = -bounds.max.x;
         this.minY = -bounds.max.y;
         this.baseX = transform.position.x - X * 1.0f;
+
+        this.audioSource = this.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -74,6 +78,11 @@ public class TileView : MonoBehaviour, ITileView, IDragHandler, IBeginDragHandle
         if(this.destroyParticles != null)
         {
             Instantiate(this.destroyParticles, gameObject.transform.position, Quaternion.identity);
+        }
+
+        if(this.audioSource != null)
+        {
+            AudioSource.PlayClipAtPoint(this.audioSource.clip, transform.position);
         }
 
         Destroy(gameObject);
