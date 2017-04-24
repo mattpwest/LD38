@@ -83,7 +83,7 @@ namespace Match3.Core.Domain
                             break;
                         }
 
-                        if(horizontalMatch.Length >= 3)
+                        if(horizontalMatch.Length >= this.matchLength)
                         {
                             this.matches.Add(horizontalMatch);
                         }
