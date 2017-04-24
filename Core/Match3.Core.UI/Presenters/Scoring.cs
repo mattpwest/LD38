@@ -13,7 +13,7 @@ namespace Match3.Core.UI.Presenters
         private bool WonCase1 => this.IgnoreScore && this.IgnoreMatches && this.MovesAllowedReached;
         private bool WonCase2 => this.IgnoreScore && this.MatchesBeat && (this.MovesAllowedReached || this.HasMovesLeft);
         private bool WonCase3 => this.ScoreBeat && this.IgnoreMatches && (this.MovesAllowedReached || this.HasMovesLeft);
-        private bool WonCase4 => !this.IgnoreScore && this.IgnoreMatches && this.ScoreBeat && this.MatchesBeat && (this.MovesAllowedReached || this.HasMovesLeft);
+        private bool WonCase4 => this.ScoreBeat && this.MatchesBeat && (this.MovesAllowedReached || this.HasMovesLeft);
 
         public int CurrentScore { get; private set; }
         public int CurrentMatches { get; private set; }
@@ -27,7 +27,7 @@ namespace Match3.Core.UI.Presenters
         public bool HasWon => this.WonCase1 || this.WonCase2 || this.WonCase3 || this.WonCase4;
         public bool HasLost => this.MovesAllowedReached && (this.LoseCase1 || this.LoseCase2 || this.LoseCase3);
 
-        private bool LoseCase1 => !this.ScoreBeat && !this.MatchesBeat;
+        private bool LoseCase1 => !(this.ScoreBeat && this.MatchesBeat);
         private bool LoseCase2 => this.IgnoreScore && !this.MatchesBeat;
         private bool LoseCase3 => !this.ScoreBeat && this.IgnoreMatches;
 
