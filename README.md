@@ -1,2 +1,3 @@
-# LD38
-Ludum Dare 38: A Small World (we're making match 3)
+# LD38 - A Small World
+
+We made a match 3 called: Save A Small World (working title)...
